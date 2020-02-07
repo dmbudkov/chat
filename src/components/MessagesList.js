@@ -38,7 +38,7 @@ class MessagesList extends React.Component {
 
     return (
       <List className={classes.messages} ref={this.messages}>
-        {messages.map((message, index) => (
+        {messages && messages.map((message, index) => (
           <Message {...message} key={index} />
         ))}
       </List>
