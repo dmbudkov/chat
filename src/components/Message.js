@@ -1,10 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Avatar from "@material-ui/core/Avatar";
-import titleInitials from "../utils/title-initial";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
+import AvatarPerson from "./AvatarPerson";
 
 
 const styles = theme => ({
@@ -37,9 +36,7 @@ function Message ({ sender, content, classes }) {
     sender !== "me"
       ? classes.listItem
       : classes.listItemRight}>
-    <Avatar>
-      {titleInitials(sender)}
-    </Avatar>
+    <AvatarPerson sender={sender} />
     <Paper className={classes.card}>
       <Typography className={classes.name} gutterBottom>
         {sender}
