@@ -1,0 +1,76 @@
+{
+  "chats": [
+    {
+      "title": "Sergey",
+      "date": "3 days ago"
+    },
+    {
+      "title": "Dmitry",
+      "date": "8 days ago"
+    },
+    {
+      "title": "John Bush",
+      "date": "5 days ago"
+    },
+    {
+      "title": "Natalya Oreiro",
+      "date": "3 hours ago"
+    },
+    {
+      "title": "Britney Spears",
+      "date": "3 min ago"
+    },
+    {
+      "title": "Nikita",
+      "date": "3 days ago"
+    },
+    {
+      "title": "Boris"
+    },
+    {
+      "title": "Elena",
+      "date": "3 days ago"
+    },
+    {
+      "title": "Max"
+    },
+    {
+      "title": "Jenny",
+      "date": "4 days ago"
+    },
+    {
+      "title": "Donald",
+      "date": "3 days ago"
+    }
+  ],
+  "messages": [
+    {
+      "sender": "someone",
+      "content": "Hey!"
+    },
+    {
+      "sender": "me",
+      "content": "Hi"
+    },
+    {
+      "sender": "someone",
+      "content": "Lalala"
+    },
+    {
+      "sender": "me",
+      "content": "My name is Dmitry"
+    },
+    {
+      "sender": "me",
+      "content": "Lets talk about ReactLets talk about ReactLets talk about ReactLets talk about ReactLets talk about ReactLets talk about ReactLets talk about ReactLets talk about ReactLets talk about ReactLets talk about React"
+    },
+    {
+      "sender": "someone",
+      "content": "Nice to meet you"
+    },
+    {
+      "sender": "me",
+      "content": "Hey! how are you?"
+    }
+  ]
+}

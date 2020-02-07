@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,9 +10,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 
 import Paper from '@material-ui/core/Paper';
 import RestoreIcon from '@material-ui/icons/Restore';
@@ -28,6 +25,8 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
 
+import { chats, messages } from './mock-data';
+import titleInitials from './utils/title-initial';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,7 +66,7 @@ const useStyles = makeStyles(theme => ({
   messages: {
     padding: `0 ${theme.spacing(3)}px`,
     paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(11),
+    paddingBottom: theme.spacing(14),
     overflowY: 'scroll'
   },
   input: {
@@ -89,9 +88,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: 15,
     marginBottom: 8
   },
-  date: {
-    fontSize: 12,
-  },
   listItem: {
     '& > *:first-child': {
       marginRight: theme.spacing(3),
@@ -101,15 +97,19 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "row-reverse",
     '& > *:last-child': {
       marginRight: theme.spacing(3),
+      backgroundColor: "#e6dcff"
     }
   }
 }));
 
 
-export default function PersistentDrawerLeft() {
+
+function App() {
+
   const classes = useStyles();
 
   const [value, setValue] = React.useState(0);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -117,237 +117,78 @@ export default function PersistentDrawerLeft() {
   return (
     <div className={classes.root}>
 
-
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>Chat</Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer
         className={classes.drawer}
-        variant="persistent"
-        open
-        classes={{paper: classes.drawerPaper}}
-      >
+        variant="persistent" open
+        classes={{paper: classes.drawerPaper}}>
         <Toolbar>
-          <TextField fullWidth type="search" id="standard-required" label="Search" />
+          <TextField fullWidth type="search" label="Search" />
         </Toolbar>
         <List className={classes.list}>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <ImageIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Ivan Vasilevich" secondary="Jan 9, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <WorkIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Fedora U" secondary="Jan 7, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Leo" secondary="July 20, 2014" />
-          </ListItem>
+          {chats.map((chat, index) => (
+            <ListItem key={index}>
+              <ListItemAvatar>
+                <Avatar>
+                  {titleInitials(chat.title)}
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={chat.title} secondary={chat.date} />
+            </ListItem>
+          ))}
         </List>
-
-          <BottomNavigation
-            value={value}
-            onChange={handleChange}
-            showLabels
-          >
-            <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-            <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-          </BottomNavigation>
-
-
+        <BottomNavigation
+          value={value}Q
+          onChange={handleChange}
+          showLabels>
+          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
+        </BottomNavigation>
         <IconButton
           className={classes.newChat}
-
           color="primary">
           <AddIcon />
         </IconButton>
-
       </Drawer>
+
       <main className={classes.content}>
         <div className={classes.drawerHeader} />
-
-        <div className={classes.messages}>
-          <div>
-            <ListItem>
+        <List className={classes.messages}>
+          {messages.map((message, index) => (
+            <ListItem className={
+              message.sender !== "me"
+                ? classes.listItem
+                : classes.listItemRight}
+                      key={index}>
               <Avatar>
-                <ImageIcon />
+                {titleInitials(message.sender)}
               </Avatar>
               <Paper className={classes.card}>
                 <Typography className={classes.name} gutterBottom>
-                  Dmitry Budkov
+                  {message.sender}
                 </Typography>
                 <Typography variant="body2" component="p" gutterBottom>
-                  Lets talk about React
-                </Typography>
-                <Typography className={classes.date} color="textSecondary" >
-                  3 days ago
+                  {message.content}
                 </Typography>
               </Paper>
             </ListItem>
-            <ListItem className={classes.listItem}>
-              <Avatar>
-                <ImageIcon />
-              </Avatar>
-              <Paper className={classes.card}>
-                <Typography className={classes.name}>
-                  Dmitry Budkov
-                </Typography>
-                <Typography variant="body2" component="p" gutterBottom>
-                  Lets talk about ReactLets talk about ReactLets talk about ReactLets
-                  talk about ReactLets talk about ReactLets talk about ReactLets talk
-                  about ReactLets talk about ReactLets talk about ReactLets
-                  talk about React
-                </Typography>
-                <Typography className={classes.date} color="textSecondary" >
-                  3 days ago
-                </Typography>
-              </Paper>
-            </ListItem>
-            <ListItem className={classes.listItemRight}>
-              <Avatar>
-                <ImageIcon />
-              </Avatar>
-              <Paper className={classes.card}>
-                <Typography className={classes.name} gutterBottom>
-                  Dmitry Budkov
-                </Typography>
-                <Typography variant="body2" component="p" gutterBottom>
-                  Lets talk about React
-                </Typography>
-                <Typography className={classes.date} color="textSecondary" >
-                  3 days ago
-                </Typography>
-              </Paper>
-            </ListItem>
-            <ListItem>
-            <Avatar>
-              <ImageIcon />
-            </Avatar>
-            <Paper className={classes.card}>
-              <Typography className={classes.name} gutterBottom>
-                Dmitry Budkov
-              </Typography>
-              <Typography variant="body2" component="p" gutterBottom>
-                Lets talk about React
-              </Typography>
-              <Typography className={classes.date} color="textSecondary" >
-                3 days ago
-              </Typography>
-            </Paper>
-          </ListItem>
-          </div>
-
-
-        </div>
+          ))}
+        </List>
 
         <Paper className={classes.input}>
           <Toolbar>
-              <Input fullWidth id="standard-required" placeholder="Type your message..." />
+            <Input fullWidth id="standard-required" placeholder="Type your message..." />
           </Toolbar>
         </Paper>
       </main>
     </div>
   );
+
 }
+
+export default App;
