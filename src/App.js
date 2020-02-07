@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,8 +15,6 @@ import Paper from '@material-ui/core/Paper';
 import RestoreIcon from '@material-ui/icons/Restore';
 import ExploreIcon from '@material-ui/icons/Explore';
 
-import TextField from '@material-ui/core/TextField';
-
 import Input from '@material-ui/core/Input';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -28,20 +26,18 @@ import IconButton from '@material-ui/core/IconButton';
 import { chats, messages } from './mock-data';
 import titleInitials from './utils/title-initial';
 
-const useStyles = makeStyles(theme => ({
+import Search from './components/Search';
+import Message from "./components/Message";
+import SideBar from "./components/SideBar";
+
+
+const styles = theme => ({
   root: {
     display: 'flex',
   },
   appBar: {
     width: `calc(100% - 320px)`,
     marginLeft: 320,
-  },
-  drawer: {
-    width: 320,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: 320
   },
   drawerHeader: {
     display: 'flex',
@@ -74,121 +70,63 @@ const useStyles = makeStyles(theme => ({
     bottom: theme.spacing(3),
     left: theme.spacing(3),
     right: theme.spacing(3)
-  },
-  newChat: {
-    position: "absolute",
-    bottom: theme.spacing(11),
-    right: theme.spacing(3),
-  },
-  card: {
-    padding: 10,
-    maxWidth: 275,
-  },
-  name: {
-    fontSize: 15,
-    marginBottom: 8
-  },
-  listItem: {
-    '& > *:first-child': {
-      marginRight: theme.spacing(3),
-    }
-  },
-  listItemRight: {
-    flexDirection: "row-reverse",
-    '& > *:last-child': {
-      marginRight: theme.spacing(3),
-      backgroundColor: "#e6dcff"
+  }
+});
+
+
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.messages = React.createRef();
+  }
+
+  scrollDown() {
+    const node = this.messages.current;
+    if(node) {
+      node.scrollTop = node.scrollHeight;
     }
   }
-}));
 
+  componentDidUpdate() {
+    this.scrollDown();
+  }
 
+  componentDidMount() {
+    this.scrollDown()
+  }
 
-function App() {
+  render() {
+    const { classes } = this.props;
 
-  const classes = useStyles();
+    return (
+      <div className={classes.root}>
 
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    <div className={classes.root}>
-
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" noWrap>Chat</Typography>
-        </Toolbar>
-      </AppBar>
-
-      <Drawer
-        className={classes.drawer}
-        variant="persistent" open
-        classes={{paper: classes.drawerPaper}}>
-        <Toolbar>
-          <TextField fullWidth type="search" label="Search" />
-        </Toolbar>
-        <List className={classes.list}>
-          {chats.map((chat, index) => (
-            <ListItem key={index}>
-              <ListItemAvatar>
-                <Avatar>
-                  {titleInitials(chat.title)}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={chat.title} secondary={chat.date} />
-            </ListItem>
-          ))}
-        </List>
-        <BottomNavigation
-          value={value}Q
-          onChange={handleChange}
-          showLabels>
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-        </BottomNavigation>
-        <IconButton
-          className={classes.newChat}
-          color="primary">
-          <AddIcon />
-        </IconButton>
-      </Drawer>
-
-      <main className={classes.content}>
-        <div className={classes.drawerHeader} />
-        <List className={classes.messages}>
-          {messages.map((message, index) => (
-            <ListItem className={
-              message.sender !== "me"
-                ? classes.listItem
-                : classes.listItemRight}
-                      key={index}>
-              <Avatar>
-                {titleInitials(message.sender)}
-              </Avatar>
-              <Paper className={classes.card}>
-                <Typography className={classes.name} gutterBottom>
-                  {message.sender}
-                </Typography>
-                <Typography variant="body2" component="p" gutterBottom>
-                  {message.content}
-                </Typography>
-              </Paper>
-            </ListItem>
-          ))}
-        </List>
-
-        <Paper className={classes.input}>
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-            <Input fullWidth id="standard-required" placeholder="Type your message..." />
+            <Typography variant="h6" noWrap>Chat</Typography>
           </Toolbar>
-        </Paper>
-      </main>
-    </div>
-  );
+        </AppBar>
 
+        <SideBar />
+
+        <main className={classes.content}>
+          <div className={classes.drawerHeader} />
+          <List className={classes.messages} ref={this.messages}>
+            {messages.map((message, index) => (
+              <Message {...message} key={index} />
+            ))}
+          </List>
+
+          <Paper className={classes.input}>
+            <Toolbar>
+              <Input fullWidth id="standard-required" placeholder="Type your message..." />
+            </Toolbar>
+          </Paper>
+        </main>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withStyles(styles)(App);
