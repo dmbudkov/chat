@@ -7,7 +7,7 @@ import getColor from "../utils/color-from";
 export default function AvatarPerson({ sender }) {
   return (
     <Avatar style={{ background: getColor(sender) }}>
-      {titleInitials(sender)}
+      { titleInitials(sender) }
     </Avatar>
   )
 }
