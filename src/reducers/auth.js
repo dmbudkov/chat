@@ -2,10 +2,12 @@ import {SIGNUP_SUCCESS, SIGNUP_FAILURE,
         LOGIN_SUCCESS, LOGIN_FAILURE,
         LOGOUT_SUCCESS} from "../constants/";
 
+const token = localStorage.getItem('token');
+
 const initialState = {
-  isAuth: false,
+  isAuth: !!token,
   user: null,
-  token: '',
+  token,
 };
 
 export default function auth(state = initialState, action) {

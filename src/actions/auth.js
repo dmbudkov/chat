@@ -22,6 +22,19 @@ export function signup(username, password) {
       },
     })
       .then(data => data.json())
+      .then(json => {
+        if(json.success){
+          return json;
+        }
+        throw new Error(json.message);
+      })
+      .then(json => {
+        if(!json.token){
+          throw new Error(json.message);
+        }
+        localStorage.setItem('token', json.token);
+        return json;
+      })
       .then(json => dispatch({
         type: SIGNUP_SUCCESS,
         payload: json
@@ -51,6 +64,19 @@ export function login(username, password) {
       },
     })
       .then(data => data.json())
+      .then(json => {
+        if(json.success){
+          return json;
+        }
+        throw new Error(json.message);
+      })
+      .then(json => {
+        if(!json.token){
+          throw new Error(json.message);
+        }
+        localStorage.setItem('token', json.token);
+        return json;
+      })
       .then(json => dispatch({
         type: LOGIN_SUCCESS,
         payload: json
