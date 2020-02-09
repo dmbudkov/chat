@@ -2,7 +2,6 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import fetch from 'isomorphic-fetch';
 
 const styles = () => ({
   form: {
@@ -45,25 +44,7 @@ class LoginForm extends React.Component {
 
     const { username, password } = this.state;
 
-
-    fetch("http://localhost:8000/v1/login", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username.value,
-        password: password.value
-      }),
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-    }).then((data) => {
-      return data.json()
-    }).then((response) => {
-      console.log(response);
-
-    }).catch((reason) => {
-      console.error(reason);
-    })
+    this.props.onSubmit(username.value, password.value);
   };
 
   render() {

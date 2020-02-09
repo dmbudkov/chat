@@ -57,8 +57,7 @@ class SignupForm extends React.Component {
       return;
     }
 
-
-    console.log(username.value, password.value);
+    this.props.onSubmit(username.value, password.value);
   };
 
   render() {

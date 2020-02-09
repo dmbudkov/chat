@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -22,12 +23,16 @@ const styles = () => ({
   }
 });
 
-function WelcomePage({ classes }) {
+function WelcomePage({ classes, signup, login, isAuth }) {
   const [activeTabValue, setTabValue] = React.useState(0);
 
   const handleChangeActiveTab = (event, newValue) => {
     setTabValue(newValue);
   };
+
+  if(isAuth){
+    return <Redirect to='/chat' />
+  }
 
   return (
     <div className={classes.root}>
@@ -43,8 +48,8 @@ function WelcomePage({ classes }) {
             <Tab label="Sign up" icon={<PersonAddIcon />} />
           </Tabs>
         </AppBar>
-        { activeTabValue === 0 && <LoginForm /> }
-        { activeTabValue === 1 && <SignupForm /> }
+        { activeTabValue === 0 && <LoginForm onSubmit={login} /> }
+        { activeTabValue === 1 && <SignupForm onSubmit={signup} /> }
       </Paper>
     </div>
   );
