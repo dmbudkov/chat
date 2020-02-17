@@ -7,11 +7,24 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 const store = configureStore();
+const rootEl = document.getElementById('root');
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  rootEl
 );
+
+if (module.hot) {
+  module.hot.accept('./components/App', () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      rootEl
+    )
+  })
+}
+
 serviceWorker.unregister();
