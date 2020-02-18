@@ -19,4 +19,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }); */
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WelcomePage);

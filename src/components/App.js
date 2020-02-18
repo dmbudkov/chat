@@ -1,16 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 import ChatPage from "../containters/ChatPage";
 import WelcomePage from "../containters/WelcomePage";
-
+import PrivateRoute from "../containters/PrivateRoute";
+import history from "../utils/history";
 
 const App = () => {
   return (
-    <Router>
+    <Router history={history}>
       <Switch>
-        <Route path="/chat" exact>
+        <PrivateRoute path="/chat" exact>
           <ChatPage />
-        </Route>
+        </PrivateRoute>
         <Route path="/welcome" exact>
           <WelcomePage />
         </Route>
