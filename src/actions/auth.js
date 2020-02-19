@@ -1,5 +1,5 @@
-import * as types from "../constants/";
-import fetch from "isomorphic-fetch";
+import * as types from "../constants/auth";
+import callApi from "../utils/call-api";
 
 
 export function signup(username, password) {
@@ -8,24 +8,10 @@ export function signup(username, password) {
       type: types.SIGNUP_REQUEST,
     });
 
-    return fetch("http://localhost:8000/v1/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        password: password
-      }),
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
+    return callApi("signup", undefined,{ method: "POST" }, {
+      username: username,
+      password: password
     })
-      .then(data => data.json())
-      .then(json => {
-        if(json.success){
-          return json;
-        }
-        throw new Error(json.message);
-      })
       .then(json => {
         if(!json.token){
           throw new Error(json.message);
@@ -50,24 +36,10 @@ export function login(username, password) {
       type: types.LOGIN_REQUEST,
     });
 
-    return fetch("http://localhost:8000/v1/login", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        password: password
-      }),
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
+    return callApi("login", undefined,{ method: "POST" },{
+      username: username,
+      password: password
     })
-      .then(data => data.json())
-      .then(json => {
-        if(json.success){
-          return json;
-        }
-        throw new Error(json.message);
-      })
       .then(json => {
         if(!json.token){
           throw new Error(json.message);
@@ -105,20 +77,7 @@ export function recieveAuth() {
       return;
     }
 
-    return fetch("http://localhost:8000/v1/users/me", {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-    })
-      .then(data => data.json())
-      .then(json => {
-        if(json.success){
-          return json;
-        }
-        throw new Error(json.message);
-      })
+    return callApi("users/me", token)
       .then(json => dispatch({
         type: types.RECEIVE_AUTH_SUCCESS,
         payload: json
