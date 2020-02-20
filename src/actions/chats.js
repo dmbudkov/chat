@@ -81,9 +81,38 @@ export function setActiveChat(chatId) {
   };
 }
 
+export function createChat() {
+  return (dispatch, getState) => {
+    //
+  }
+}
 
-// joinChat
-// leaveChat
-// createChat
-// deleteChat
-// sendMessage
+export function joinChat() {
+  return (dispatch, getState) => {
+    //
+  }
+}
+
+export function leaveChat() {
+  return (dispatch, getState) => {
+    //
+  }
+}
+
+export function deleteChat() {
+  return (dispatch, getState) => {
+    //
+  }
+}
+
+export function sendMessage() {
+  return (dispatch, getState) => {
+    //
+  }
+}
+
+export function editUser() {
+  return (dispatch, getState) => {
+    //
+  }
+}
