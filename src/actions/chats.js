@@ -11,7 +11,7 @@ export function fetchMyChats() {
     });
 
     callApi('chats/my', token)
-      .then((data) => dispatch({
+      .then(data => dispatch({
         type: types.FETCH_MY_CHATS_SUCCESS,
         payload: data
       }))
@@ -29,7 +29,7 @@ export function fetchAllChats() {
     });
 
     callApi('chats', token)
-      .then((data) => dispatch({
+      .then(data => dispatch({
         type: types.FETCH_ALL_CHATS_SUCCESS,
         payload: data
       }))
@@ -48,7 +48,7 @@ export function fetchChat(chatId) {
     });
 
     callApi(`chats/${chatId}`, token)
-      .then((data) => {
+      .then(data => {
         dispatch({
           type: types.FETCH_CHAT_SUCCESS,
           payload: data
@@ -81,9 +81,29 @@ export function setActiveChat(chatId) {
   };
 }
 
-export function createChat() {
+export function createChat(chatName) {
+
   return (dispatch, getState) => {
-    //
+    const { token } = getState().auth;
+    dispatch({
+      type: types.CHAT_CREATE_REQUEST
+    });
+    callApi('chats', token, { method: "POST" }, {
+      data: {
+        title: chatName
+      }
+    })
+      .then(data => dispatch({
+        type: types.CHAT_CREATE_SUCCESS,
+        payload: data
+      }))
+      .catch(reason => {
+        dispatch({
+          type: types.CHAT_CREATE_FAILURE,
+          payload: reason
+        });
+        console.log('server error'); //TODO create notification
+      })
   }
 }
 

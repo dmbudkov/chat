@@ -20,7 +20,7 @@ const styles = () => ({
 
 class SideBar extends React.Component {
   render() {
-    const { classes, chats } = this.props;
+    const { classes, chats, createChat } = this.props;
 
     return (
       <Drawer
@@ -31,7 +31,7 @@ class SideBar extends React.Component {
         <Search />
         <ChatList chats={chats} />
         <Navigation />
-        <NewChatButton />
+        <NewChatButton createChat={createChat} />
       </Drawer>
     );
   }

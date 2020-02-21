@@ -22,14 +22,28 @@ const styles = theme => ({
   }
 });
 
-function NewChatButton({ classes }) {
+function NewChatButton({ classes, createChat }) {
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
+  const [chatName, setChatName] = React.useState({
+    value: '',
+    valid: true
+  });
+  const handleOpen = () => { setOpen(true) };
+  const handleClose = () => { setOpen(false) };
+
+  const handleChangeValue = (event) => {
+    event.persist();
+    setChatName({
+      ...chatName,
+      value: event.target.value
+    });
   };
-  const handleClose = () => {
-    setOpen(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createChat(chatName.value);
+    handleClose();
   };
 
   return (
@@ -43,9 +57,11 @@ function NewChatButton({ classes }) {
       </IconButton>
 
       <Modal open={open} handleClose={handleClose}>
-        <Typography variant="h6" noWrap className={classes.title}>Create New Chat</Typography>
-        <TextField required fullWidth name="create" label="Name" />
-        <Button className={classes.button} color="primary">Create</Button>
+        <form onSubmit={handleSubmit}>
+          <Typography variant="h6" noWrap className={classes.title}>Create New Chat</Typography>
+          <TextField required fullWidth name="title" label="Name" onChange={handleChangeValue} value={chatName.value} />
+          <Button className={classes.button} color="primary" type="submit">Create</Button>
+        </form>
       </Modal>
     </>
   )
