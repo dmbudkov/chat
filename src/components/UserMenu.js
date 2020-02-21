@@ -26,7 +26,7 @@ const styles = {
   }
 };
 
-export function UserMenu ({ classes }) {
+export function UserMenu ({ classes, logout }) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = event => {
@@ -43,6 +43,11 @@ export function UserMenu ({ classes }) {
   };
   const handleCloseModal = () => {
     setOpen(false);
+  };
+
+  const handleLogout = () => {
+    handleClose();
+    logout();
   };
 
   return (
@@ -63,7 +68,7 @@ export function UserMenu ({ classes }) {
         onClose={handleClose}
       >
         <MenuItem onClick={handleOpenModal}>Edit Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
 
       <Modal open={open} handleClose={handleCloseModal}>

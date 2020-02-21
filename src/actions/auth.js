@@ -62,7 +62,22 @@ export function logout() {
   return (dispatch) => {
     dispatch({
       type: types.LOGOUT_REQUEST,
-    })
+    });
+
+    new Promise((resolve, reject) => {
+      localStorage.removeItem("token");
+      resolve();
+    }).then(() => {
+        dispatch({
+          type: types.LOGOUT_SUCCESS
+        });
+      })
+      .catch(reason => {
+        dispatch({
+          type: types.LOGOUT_FAILURE,
+          payload: reason
+        });
+      });
   };
 }
 
