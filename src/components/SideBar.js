@@ -19,8 +19,22 @@ const styles = () => ({
 
 
 class SideBar extends React.Component {
+  state = {
+    activeTab: 0
+  };
+
+  setActiveTab = (e, activeTab) => {
+    this.setState({
+      ...this.state,
+      activeTab
+    });
+  };
+
   render() {
-    const { classes, chats, createChat } = this.props;
+    const { classes, chats, myChats, createChat } = this.props;
+    const dataChat = this.state.activeTab === 1
+      ? chats
+      : myChats;
 
     return (
       <Drawer
@@ -29,8 +43,9 @@ class SideBar extends React.Component {
         classes={{paper: classes.drawerPaper}}
       >
         <Search />
-        <ChatList chats={chats} />
-        <Navigation />
+        <ChatList chats={dataChat} />
+        <Navigation activeTab={this.state.activeTab}
+                    setActiveTab={this.setActiveTab} />
         <NewChatButton createChat={createChat} />
       </Drawer>
     );

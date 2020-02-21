@@ -25,11 +25,13 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, chats, createChat, logout } = this.props;
+    const { classes, chats, myChats, createChat, logout } = this.props;
     return (
       <div className={classes.root}>
         <ChatHeader logout={logout} />
-        <SideBar chats={chats} createChat={createChat} />
+        <SideBar chats={chats}
+                 myChats={myChats}
+                 createChat={createChat} />
         <Chat messages={messages} />
       </div>
     );

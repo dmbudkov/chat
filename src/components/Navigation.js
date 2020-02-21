@@ -6,24 +6,13 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 
 
 export default class extends React.Component {
-  state = {
-    activeTab: 0,
-  };
-
-  handleChangeActiveTab = (event, value) => {
-    this.setState({
-      ...this.state,
-      activeTab: value,
-    })
-  };
-
   render() {
-    const { activeTab } = this.state;
+    const { activeTab, setActiveTab } = this.props;
 
     return (
       <BottomNavigation
         value={activeTab}
-        onChange={this.handleChangeActiveTab}
+        onChange={setActiveTab}
         showLabels>
         <BottomNavigationAction
           label="My Chats"
