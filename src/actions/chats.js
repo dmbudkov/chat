@@ -47,7 +47,7 @@ export function fetchChat(chatId) {
       type: types.FETCH_CHAT_REQUEST
     });
 
-    callApi(`chats/${chatId}`, token)
+    return callApi(`chats/${chatId}`, token)
       .then(data => {
         dispatch({
           type: types.FETCH_CHAT_SUCCESS,
@@ -64,21 +64,22 @@ export function fetchChat(chatId) {
 
 export function setActiveChat(chatId) {
   return (dispatch) => {
-    return dispatch(fetchChat(chatId))
+    dispatch(fetchChat(chatId))
       .then(data => {
         if(!data){
           dispatch({
             type: types.UNSET_ACTIVE_CHAT
           });
-          return dispatch(redirect("/chat"))
+          return dispatch(redirect("chat"))
         }
 
         dispatch({
           type: types.SET_ACTIVE_CHAT,
           payload: data
         });
+        return dispatch(redirect(`chat/${chatId}`));
       });
-  };
+  }
 }
 
 export function createChat(chatName) {
@@ -107,9 +108,23 @@ export function createChat(chatName) {
   }
 }
 
-export function joinChat() {
+export function joinChat(chatId) {
   return (dispatch, getState) => {
-    //
+    const { token } = getState().auth;
+    dispatch({
+      type: types.JOIN_CHAT_REQUEST
+    });
+    callApi(`chats/${chatId}/join`, token)
+      .then(data => dispatch({
+        type: types.JOIN_CHAT_SUCCESS,
+        payload: data
+      }))
+      .catch(reason => {
+        dispatch({
+          type: types.JOIN_CHAT_FAILURE,
+          payload: reason
+        });
+      })
   }
 }
 

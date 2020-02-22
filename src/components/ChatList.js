@@ -11,11 +11,16 @@ const styles = {
   }
 };
 
-function ChatList({ classes, chats }) {
+function ChatList({ classes, chats, setActiveChat, activeId }) {
   return (
-    <List className={classes.list}>
+    <List className={classes.list}
+          >
       {chats && chats.map((chat, index) => (
-        <ChatListItem { ...chat } key={index} />
+        <ChatListItem { ...chat }
+                      key={index}
+                      setActiveChat={setActiveChat}
+                      isActive={activeId === chat._id}
+        />
       ))}
     </List>
   )

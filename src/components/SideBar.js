@@ -31,7 +31,7 @@ class SideBar extends React.Component {
   };
 
   render() {
-    const { classes, chats, myChats, createChat } = this.props;
+    const { classes, chats, myChats, createChat, setActiveChat, activeId } = this.props;
     const dataChat = this.state.activeTab === 1
       ? chats
       : myChats;
@@ -43,7 +43,10 @@ class SideBar extends React.Component {
         classes={{paper: classes.drawerPaper}}
       >
         <Search />
-        <ChatList chats={dataChat} />
+        <ChatList chats={dataChat}
+                  setActiveChat={setActiveChat}
+                  activeId={activeId}
+        />
         <Navigation activeTab={this.state.activeTab}
                     setActiveTab={this.setActiveTab} />
         <NewChatButton createChat={createChat} />
