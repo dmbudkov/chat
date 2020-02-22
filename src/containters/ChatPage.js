@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
   chats: fromChats.getByIds(state.chats, state.chats.allIds),
   myChats: fromChats.getByIds(state.chats, state.chats.myId),
   activeChat: state.chats.activeChat,
+  isAuth: state.auth.isAuth
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

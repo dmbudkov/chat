@@ -12,9 +12,9 @@ const App = () => {
         <PrivateRoute path="/chat" exact>
           <ChatPage />
         </PrivateRoute>
-        <Route path="/chat/:id" exact>
+        <PrivateRoute path="/chat/:id" exact>
           <ChatPage />
-        </Route>
+        </PrivateRoute>
         <Route path="/welcome" exact>
           <WelcomePage />
         </Route>

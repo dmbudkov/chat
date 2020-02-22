@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import MessagesList from "./MessagesList";
 import TypeMessage from "./TypeMessage";
+import EmptyChat from "./EmptyChat";
 
 const styles = theme => ({
   drawerHeader: {
@@ -26,10 +27,14 @@ const styles = theme => ({
   }
 });
 
-const Chat = ({ classes, messages }) => (
+const Chat = ({ classes, messages, activeChat }) => (
   <main className={classes.content}>
     <div className={classes.drawerHeader} />
-    <MessagesList messages={ messages } />
+    {
+      activeChat.id
+      ? <MessagesList messages={ messages } />
+      : <EmptyChat />
+    }
     <TypeMessage />
   </main>
 );
