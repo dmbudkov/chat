@@ -1,6 +1,7 @@
 import * as types from "../constants/chats";
 import callApi from "../utils/call-api";
 import { redirect } from "./services";
+import history from "../utils/history";
 
 
 export function fetchMyChats() {
@@ -24,15 +25,28 @@ export function fetchMyChats() {
 export function fetchAllChats() {
   return (dispatch, getState) => {
     const { token } = getState().auth;
+    const urlId = history.location.pathname.split('/').pop();
+
     dispatch({
       type: types.FETCH_ALL_CHATS_REQUEST
     });
 
     callApi('chats', token)
-      .then(data => dispatch({
-        type: types.FETCH_ALL_CHATS_SUCCESS,
-        payload: data
-      }))
+      .then(data => {
+        dispatch({
+          type: types.FETCH_ALL_CHATS_SUCCESS,
+          payload: data
+        });
+
+        const chatIds = data.chats.map(chat => chat._id);
+
+        if(chatIds.indexOf(urlId) !== -1){
+          dispatch(setActiveChat(urlId));
+        }
+        else {
+          return dispatch(redirect("chat"));
+        }
+      })
       .catch(reason => dispatch({
         type: types.FETCH_ALL_CHATS_FAILURE,
         payload: reason
@@ -136,7 +150,29 @@ export function leaveChat() {
 
 export function deleteChat() {
   return (dispatch, getState) => {
-    //
+    const { token } = getState().auth;
+    dispatch({
+      type: types.DELETE_CHAT_REQUEST
+    });
+
+    const { activeChat } = getState().chats;
+
+    if(!activeChat.id) {
+      return dispatch({
+        type: types.DELETE_CHAT_FAILURE
+      });
+    }
+
+    callApi(`chats/${activeChat.id}`, token, { method: "DELETE" })
+      .then(() => dispatch({
+        type: types.DELETE_CHAT_SUCCESS,
+        payload: activeChat.id
+      }))
+      .catch(() => {
+        dispatch({
+          type: types.DELETE_CHAT_FAILURE
+        });
+      })
   }
 }
 

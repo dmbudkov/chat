@@ -16,25 +16,27 @@ const styles = () => ({
 class ChatPage extends React.Component {
 
   componentDidMount() {
-    const { fetchAllChats, fetchMyChats, urlId, setActiveChat } = this.props;
+    const { fetchAllChats, fetchMyChats } = this.props;
 
     Promise.all([
       fetchAllChats(),
-      fetchMyChats(),
-      urlId ? setActiveChat(urlId) : null,
+      fetchMyChats()
     ])
   }
 
   render() {
-    const { classes, chats, myChats, createChat, logout, setActiveChat, activeId } = this.props;
+    const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat } = this.props;
     return (
       <div className={classes.root}>
-        <ChatHeader logout={logout} />
+        <ChatHeader title={activeChat.title}
+                    logout={logout}
+                    deleteChat={deleteChat}
+        />
         <SideBar chats={chats}
                  myChats={myChats}
                  createChat={createChat}
                  setActiveChat={setActiveChat}
-                 activeId={activeId}
+                 activeId={activeChat.id}
         />
         <Chat messages={messages} />
       </div>

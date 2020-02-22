@@ -20,3 +20,7 @@ export const CHAT_CREATE_FAILURE = Symbol("chats/CHAT_CREATE_FAILURE");
 export const JOIN_CHAT_REQUEST = Symbol("chats/JOIN_CHAT_REQUEST");
 export const JOIN_CHAT_SUCCESS = Symbol("chats/JOIN_CHAT_SUCCESS");
 export const JOIN_CHAT_FAILURE = Symbol("chats/JOIN_CHAT_FAILURE");
+
+export const DELETE_CHAT_REQUEST = Symbol("chats/DELETE_CHAT_REQUEST");
+export const DELETE_CHAT_SUCCESS = Symbol("chats/DELETE_CHAT_SUCCESS");
+export const DELETE_CHAT_FAILURE = Symbol("chats/DELETE_CHAT_FAILURE");

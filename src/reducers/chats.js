@@ -2,19 +2,33 @@ import * as types from "../constants/chats";
 import { combineReducers } from "redux";
 
 const initialState = {
-  activeId: '',
+  activeChat: {
+    id: '',
+    title: ''
+  },
   allIds: [],
   myId: [],
   byIds: {}
 };
 
-const activeId = (state = initialState.activeId, action) => {
+const activeChat = (state = {
+  id: initialState.id,
+  title: initialState.title
+}, action) => {
   switch (action.type) {
     case types.SET_ACTIVE_CHAT:
     case types.CHAT_CREATE_SUCCESS:
-      return action.payload.chat._id;
+      return {
+        ...state,
+        id: action.payload.chat._id,
+        title: action.payload.chat.title
+      };
     case types.UNSET_ACTIVE_CHAT:
-      return "";
+      return {
+        ...state,
+        id: '',
+        title: ''
+      };
     default:
       return state;
   }
@@ -28,6 +42,13 @@ const allIds = (state = initialState.allIds, action) => {
         ...state,
         action.payload.chat._id
       ];
+    case types.DELETE_CHAT_SUCCESS:
+      const index = state.indexOf(action.payload);
+
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index+1, state.length)
+      ];
     default:
       return state;
   }
@@ -40,6 +61,13 @@ const myId = (state = initialState.myId, action) => {
       return [
         ...state,
         action.payload.chat._id
+      ];
+    case types.DELETE_CHAT_SUCCESS:
+      const index = state.indexOf(action.payload);
+
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index+1, state.length)
       ];
     default:
       return state;
@@ -67,7 +95,7 @@ const byIds = (state = initialState.byIds, action) => {
 };
 
 export default combineReducers({
-  activeId,
+  activeChat,
   allIds,
   myId,
   byIds

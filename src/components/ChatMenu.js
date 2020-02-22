@@ -4,7 +4,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-export default function () {
+export default function ({ deleteChat }) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = event => {
@@ -12,6 +12,10 @@ export default function () {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleDeleteChat = () => {
+    deleteChat();
+    handleClose();
   };
 
   return (
@@ -30,7 +34,7 @@ export default function () {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={handleDeleteChat}>Delete</MenuItem>
       </Menu>
     </>
   )
