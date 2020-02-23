@@ -4,6 +4,7 @@ import { messages } from '../mock-data';
 import SideBar from "./SideBar";
 import ChatHeader from "./ChatHeader";
 import Chat from "./Chat";
+import {isCreator} from "../reducers/chats";
 
 
 const styles = () => ({
@@ -25,13 +26,17 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember } = this.props;
+    const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember, joinChat, leaveChat, isMember, isCreator } = this.props;
     return (
       <div className={classes.root}>
         <ChatHeader title={activeChat.title}
                     logout={logout}
                     deleteChat={deleteChat}
                     isAuth={isAuth}
+                    isMember={isMember}
+                    isCreator={isCreator}
+                    joinChat={joinChat}
+                    leaveChat={leaveChat}
         />
         <SideBar chats={chats}
                  myChats={myChats}
@@ -42,6 +47,7 @@ class ChatPage extends React.Component {
         <Chat messages={messages}
               activeChat={activeChat}
               isChatMember={isChatMember}
+              joinChat={joinChat}
         />
       </div>
     );

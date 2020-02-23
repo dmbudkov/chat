@@ -49,6 +49,7 @@ const allIds = (state = initialState.allIds, action) => {
         ...state.slice(0, index),
         ...state.slice(index+1, state.length)
       ];
+
     default:
       return state;
   }
@@ -58,16 +59,24 @@ const myId = (state = initialState.myId, action) => {
     case types.FETCH_MY_CHATS_SUCCESS:
       return action.payload.chats.map(getChatId);
     case types.CHAT_CREATE_SUCCESS:
+    case types.JOIN_CHAT_SUCCESS:
       return [
         ...state,
         action.payload.chat._id
       ];
     case types.DELETE_CHAT_SUCCESS:
-      const index = state.indexOf(action.payload);
+      const indexDel = state.indexOf(action.payload);
 
       return [
-        ...state.slice(0, index),
-        ...state.slice(index+1, state.length)
+        ...state.slice(0, indexDel),
+        ...state.slice(indexDel+1, state.length)
+      ];
+    case types.LEAVE_CHAT_SUCCESS:
+      const indexLeave = state.indexOf(action.payload.chat._id);
+
+      return [
+        ...state.slice(0, indexLeave),
+        ...state.slice(indexLeave+1, state.length)
       ];
     default:
       return state;
@@ -85,6 +94,8 @@ const byIds = (state = initialState.byIds, action) => {
         }), {})
       };
     case types.CHAT_CREATE_SUCCESS:
+    case types.JOIN_CHAT_SUCCESS:
+    case types.LEAVE_CHAT_SUCCESS:
       return {
         ...state,
         [action.payload.chat._id]: action.payload.chat
@@ -108,7 +119,7 @@ export const getByIds = (state, ids) => ids.map(id => state.byIds[id]);
 
 export const isMember = (state, chatId, userId) => {
   let chat = state.byIds[chatId];
-  return chat ? chat.members.indexOf(userId) !== -1 : false;
+  return chat ? chat.members.some(i => i._id === userId) : false;
 };
 
 export const isCreator = (state, chatId, userId) => {

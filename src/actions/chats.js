@@ -122,9 +122,11 @@ export function createChat(chatName) {
   }
 }
 
-export function joinChat(chatId) {
+export function joinChat() {
   return (dispatch, getState) => {
     const { token } = getState().auth;
+    const chatId = getState().chats.activeChat.id;
+
     dispatch({
       type: types.JOIN_CHAT_REQUEST
     });
@@ -144,7 +146,23 @@ export function joinChat(chatId) {
 
 export function leaveChat() {
   return (dispatch, getState) => {
-    //
+    const { token } = getState().auth;
+    const chatId = getState().chats.activeChat.id;
+
+    dispatch({
+      type: types.LEAVE_CHAT_REQUEST
+    });
+    callApi(`chats/${chatId}/leave`, token)
+      .then(data => dispatch({
+        type: types.LEAVE_CHAT_SUCCESS,
+        payload: data
+      }))
+      .catch(reason => {
+        dispatch({
+          type: types.LEAVE_CHAT_FAILURE,
+          payload: reason
+        });
+      })
   }
 }
 

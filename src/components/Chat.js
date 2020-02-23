@@ -28,11 +28,11 @@ const styles = theme => ({
   }
 });
 
-const Chat = ({ classes, messages, activeChat, isChatMember }) => {
+const Chat = ({ classes, messages, activeChat, isChatMember, joinChat }) => {
 
   let content = () => {
     if (!activeChat.id) return <EmptyChat />;
-    if (!isChatMember) return <JoinChat />;
+    if (!isChatMember) return <JoinChat joinChat={joinChat} />;
     return <MessagesList messages={ messages } />
   };
 

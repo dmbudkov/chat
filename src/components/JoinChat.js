@@ -35,13 +35,17 @@ const styles = (theme) => ({
   }
 });
 
-export function JoinChat ({ classes }) {
+export function JoinChat ({ classes, joinChat }) {
   return (
     <div className={classes.wrap}>
       <div className={classes.paper}>
         <Typography className={classes.title}>Enter the chat...</Typography>
         <Typography className={classes.p}>You're not in this chat yet.</Typography>
-        <Button className={classes.button} variant="contained" color="primary">Join Chat</Button>
+        <Button className={classes.button}
+                onClick={joinChat}
+                variant="contained"
+                color="primary">
+          Join Chat</Button>
       </div>
     </div>
   )

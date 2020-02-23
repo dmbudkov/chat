@@ -15,7 +15,7 @@ export default class extends React.Component {
         onChange={setActiveTab}
         showLabels>
         <BottomNavigationAction
-          label="My Chats"
+          label="My chats"
           icon={<RestoreIcon />} />
         <BottomNavigationAction
           label="Explore"
