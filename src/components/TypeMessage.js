@@ -33,8 +33,7 @@ function TypeMessage({ classes, sendMessage }) {
       <Toolbar>
         <Input fullWidth
                autoComplete="off"
-               id="standard-required"
-               placeholder="Type your message..."
+               placeholder="Введите сообщение..."
                value={value}
                onChange={handleChangeValue}
                onKeyDown={handleKeyDown}

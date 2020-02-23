@@ -102,5 +102,4 @@ export function recieveAuth() {
         payload: reason
       }))
   };
-
 }

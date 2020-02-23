@@ -37,7 +37,6 @@ export function fetchAllChats() {
           type: types.FETCH_ALL_CHATS_SUCCESS,
           payload: data
         });
-
         const chatIds = data.chats.map(chat => chat._id);
 
         if(chatIds.indexOf(urlId) !== -1){
@@ -91,7 +90,6 @@ export function setActiveChat(chatId) {
           type: types.SET_ACTIVE_CHAT,
           payload: data
         });
-
         dispatch(redirect(`chat/${chatId}`));
         return dispatch(getMessages());
       });
@@ -174,7 +172,6 @@ export function deleteChat() {
     dispatch({
       type: types.DELETE_CHAT_REQUEST
     });
-
     const chatId = getState().chats.activeChat.id;
 
     if(!chatId) {

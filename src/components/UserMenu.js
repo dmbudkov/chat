@@ -61,23 +61,22 @@ export function UserMenu ({ classes, logout }) {
       </IconButton>
 
       <Menu
-        id="user-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleOpenModal}>Edit Profile</MenuItem>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={handleOpenModal}>Редактировать</MenuItem>
+        <MenuItem onClick={handleLogout}>Выйти</MenuItem>
       </Menu>
 
       <Modal open={open} handleClose={handleCloseModal}>
-        <Typography variant="h6" noWrap className={classes.title}>Edit profile</Typography>
-        <TextField className={classes.field} required fullWidth name="username" label="Username" />
-        <TextField className={classes.field} fullWidth name="First name" label="First name" />
-        <TextField className={classes.field} fullWidth name="Last name" label="Last name" />
-        <Button className={classes.button} color="primary">Save</Button>
-        <Button className={classes.button} onClick={handleCloseModal}>Close</Button>
+        <Typography variant="h6" noWrap className={classes.title}>Редактировать профиль</Typography>
+        <TextField autoComplete="off" className={classes.field} required fullWidth name="username" label="Имя пользователя" />
+        <TextField autoComplete="off" className={classes.field} fullWidth name="firstname" label="Имя" />
+        <TextField autoComplete="off" className={classes.field} fullWidth name="lastname" label="Фамилия" />
+        <Button className={classes.button} color="primary">Сохранить</Button>
+        <Button className={classes.button} onClick={handleCloseModal}>Закрыть</Button>
       </Modal>
     </>
   )

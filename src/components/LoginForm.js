@@ -59,9 +59,10 @@ class LoginForm extends React.Component {
 
         <TextField required
                    fullWidth
+                   autoComplete='off'
                    className={classes.input}
-                   label="Username"
-                   placeholder="Type your name..."
+                   label="Логин"
+                   placeholder="Введите ваш логин..."
                    name="username"
                    onChange={this.handleChangeValue}
                    value={username.value}
@@ -70,9 +71,10 @@ class LoginForm extends React.Component {
         <TextField required
                    type="password"
                    fullWidth
+                   autoComplete='off'
                    className={classes.input}
-                   label="Password"
-                   placeholder="Type your password..."
+                   label="Пароль"
+                   placeholder="Введите ваш пароль..."
                    name="password"
                    onChange={this.handleChangeValue}
                    value={password.value}
@@ -83,7 +85,7 @@ class LoginForm extends React.Component {
                 variant="contained"
                 color="primary"
                 type="submit"
-        >Login</Button>
+        >Войти</Button>
       </form>
     )
   }

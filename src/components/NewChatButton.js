@@ -58,9 +58,22 @@ function NewChatButton({ classes, createChat }) {
 
       <Modal open={open} handleClose={handleClose}>
         <form onSubmit={handleSubmit}>
-          <Typography variant="h6" noWrap className={classes.title}>Create New Chat</Typography>
-          <TextField required fullWidth name="title" label="Name" onChange={handleChangeValue} value={chatName.value} />
-          <Button className={classes.button} color="primary" type="submit">Create</Button>
+          <Typography variant="h6"
+                      noWrap
+                      className={classes.title}
+          >Создать новый чат</Typography>
+          <TextField required
+                     fullWidth
+                     autoComplete='off'
+                     name="title"
+                     label="Название"
+                     onChange={handleChangeValue}
+                     value={chatName.value}
+          />
+          <Button className={classes.button}
+                  color="primary"
+                  type="submit"
+          >Создать</Button>
         </form>
       </Modal>
     </>

@@ -44,8 +44,8 @@ function WelcomePage({ classes, signup, login, isAuth }) {
           <Tabs value={activeTabValue}
                 variant="fullWidth"
                 onChange={handleChangeActiveTab}>
-            <Tab label="Login" icon={<PersonIcon />} />
-            <Tab label="Sign up" icon={<PersonAddIcon />} />
+            <Tab label="Войти" icon={<PersonIcon />} />
+            <Tab label="Регистрация" icon={<PersonAddIcon />} />
           </Tabs>
         </AppBar>
         { activeTabValue === 0 && <LoginForm onSubmit={login} /> }

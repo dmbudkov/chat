@@ -28,10 +28,10 @@ const styles = (theme) => ({
   },
   p: {
     fontSize: "16px",
-    marginBottom: "40px",
+    marginBottom: "35px",
   },
   button: {
-    marginLeft: '20px'
+    marginLeft: '30px'
   }
 });
 
@@ -39,13 +39,13 @@ export function JoinChat ({ classes, joinChat }) {
   return (
     <div className={classes.wrap}>
       <div className={classes.paper}>
-        <Typography className={classes.title}>Enter the chat...</Typography>
-        <Typography className={classes.p}>You're not in this chat yet.</Typography>
+        <Typography className={classes.title}>Войдите в чат...</Typography>
+        <Typography className={classes.p}>Вы пока не состоите в этом чате</Typography>
         <Button className={classes.button}
                 onClick={joinChat}
                 variant="contained"
                 color="primary">
-          Join Chat</Button>
+          Войти</Button>
       </div>
     </div>
   )

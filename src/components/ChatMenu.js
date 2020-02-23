@@ -42,9 +42,9 @@ export default function ({ deleteChat, isMember, isCreator, joinChat, leaveChat 
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        { !isCreator && !isMember && <MenuItem onClick={handleJoinChat}>Join chat</MenuItem> }
-        { !isCreator && isMember && <MenuItem onClick={handleLeaveChat}>Leave chat</MenuItem> }
-        { isCreator && <MenuItem onClick={handleDeleteChat}>Delete</MenuItem> }
+        { !isCreator && !isMember && <MenuItem onClick={handleJoinChat}>Войти в чат</MenuItem> }
+        { !isCreator && isMember && <MenuItem onClick={handleLeaveChat}>Покинуть чат</MenuItem> }
+        { isCreator && <MenuItem onClick={handleDeleteChat}>Удалить</MenuItem> }
       </Menu>
     </>
   )

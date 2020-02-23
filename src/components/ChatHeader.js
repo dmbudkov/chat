@@ -23,9 +23,6 @@ const styles = () => ({
 });
 
 function ChatHeader({ classes, title, marginLeft = 320, logout, deleteChat, isAuth, isMember, isCreator, joinChat, leaveChat }) {
-
-  const showTitle = title ? title : "Chat";
-
   return (
     <AppBar className={classes.appBar}
             style={{
@@ -34,7 +31,7 @@ function ChatHeader({ classes, title, marginLeft = 320, logout, deleteChat, isAu
             }}>
       <Toolbar className={classes.toolbar}>
         <div className={classes.wrapper}>
-          <Typography className={classes.title} variant="h6" noWrap>{showTitle}</Typography>
+          <Typography className={classes.title} variant="h6" noWrap>{title}</Typography>
           {
             title && <ChatMenu deleteChat={deleteChat}
                                isMember={isMember}

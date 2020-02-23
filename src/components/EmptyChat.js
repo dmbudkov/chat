@@ -19,7 +19,7 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[4],
     padding: theme.spacing(2, 4, 3),
-    borderRadius: "2px"
+    borderRadius: "4px"
   },
   title: {
     fontSize: "22px",
@@ -34,9 +34,9 @@ export function EmptyChat ({ classes }) {
   return (
     <div className={classes.wrap}>
       <div className={classes.paper}>
-        <Typography className={classes.title}>Start messaging...</Typography>
-        <Typography className={classes.p}>Use <b>Global</b> to explore communities around here.</Typography>
-        <Typography className={classes.p}>Use <b>Resents</b> to see your resent conversations.</Typography>
+        <Typography className={classes.title}>Начнинай общаться...</Typography>
+        <Typography className={classes.p}>Используй <b>Все чаты</b> для обзора всех чатов</Typography>
+        <Typography className={classes.p}>Используй <b>Мои чаты</b> для перехода в ваши чаты</Typography>
       </div>
     </div>
   )

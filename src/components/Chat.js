@@ -19,7 +19,8 @@ const styles = theme => ({
     flexDirection: "column",
     maxHeight: '100vh',
     height: '100vh',
-    width: '100%'
+    width: '100%',
+    backgroundColor: "#fafafa",
   },
   list: {
     width: '100%',

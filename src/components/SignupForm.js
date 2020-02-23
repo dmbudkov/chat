@@ -73,9 +73,10 @@ class SignupForm extends React.Component {
         <TextField required
                    type="text"
                    fullWidth
+                   autoComplete='off'
                    className={classes.input}
-                   label="Username"
-                   placeholder="Type your name..."
+                   label="Логин"
+                   placeholder="Введите ваш логин..."
                    name="username"
                    onChange={this.handleChangeValue}
                    value={username.value}
@@ -84,9 +85,10 @@ class SignupForm extends React.Component {
         <TextField required
                    type="password"
                    fullWidth
+                   autoComplete='off'
                    className={classes.input}
-                   label="Password"
-                   placeholder="Type your password..."
+                   label="Пароль"
+                   placeholder="Введите ваш пароль..."
                    name="password"
                    onChange={this.handleChangeValue}
                    value={password.value}
@@ -95,9 +97,10 @@ class SignupForm extends React.Component {
         <TextField required
                    type="password"
                    fullWidth
+                   autoComplete='off'
                    className={classes.input}
-                   label="Repeat password"
-                   placeholder="Type your password again..."
+                   label="Повторите пароль"
+                   placeholder="Ваш пароль снова..."
                    name="passwordRepeat"
                    onChange={this.handleChangeValue}
                    value={passwordRepeat.value}
@@ -108,7 +111,7 @@ class SignupForm extends React.Component {
                 variant="contained"
                 color="primary"
                 type="submit"
-        >Sign Up</Button>
+        >Ок</Button>
       </form>
     )
   }

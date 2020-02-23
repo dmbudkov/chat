@@ -5,6 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 
 export default () => (
   <Toolbar>
-    <TextField fullWidth type="search" label="Search" />
+    <TextField fullWidth type="search" label="Поиск"  />
   </Toolbar>
 );
