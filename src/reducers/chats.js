@@ -1,4 +1,5 @@
 import * as types from "../constants/chats";
+import { SEARCH_FILTER_APPLY } from "../constants/services";
 import { combineReducers } from "redux";
 
 const initialState = {
@@ -9,7 +10,8 @@ const initialState = {
   allIds: [],
   myId: [],
   byIds: {},
-  messages: []
+  messages: [],
+  searchWord: '',
 };
 
 const activeChat = (state = {
@@ -122,6 +124,15 @@ const messages = (state = initialState.messages, action) => {
   }
 };
 
+const searchWord = (state = initialState.searchWord, action) => {
+  switch (action.type) {
+    case SEARCH_FILTER_APPLY:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 
 export default combineReducers({
   activeChat,
@@ -129,6 +140,7 @@ export default combineReducers({
   myId,
   byIds,
   messages,
+  searchWord,
 });
 
 
@@ -147,3 +159,5 @@ export const isCreator = (state, chatId, userId) => {
 };
 
 export const isChatMember = (...args) => isMember(...args) || isCreator(...args);
+
+export const chatListFilter = (chats, q) => chats.filter(i => i.title.toLowerCase().includes(q.toLowerCase()));
