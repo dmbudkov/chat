@@ -25,7 +25,7 @@ class ChatPage extends React.Component {
 
   render() {
     const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember,
-      joinChat, leaveChat, isMember, isCreator, sendMessage, getMessages, messages, user } = this.props;
+      joinChat, leaveChat, isMember, isCreator, sendMessage, getMessages, messages, user, editUser } = this.props;
     return (
       <div className={classes.root}>
         <ChatHeader title={activeChat.title}
@@ -36,6 +36,8 @@ class ChatPage extends React.Component {
                     isCreator={isCreator}
                     joinChat={joinChat}
                     leaveChat={leaveChat}
+                    user={user}
+                    editUser={editUser}
         />
         <SideBar chats={chats}
                  myChats={myChats}

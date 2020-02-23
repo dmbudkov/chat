@@ -43,6 +43,7 @@ const styles = theme => ({
   },
   listItemCenter: {
     justifyContent: 'center',
+    cursor: 'default',
     '& > *:first-child': {
       display: 'none'
     },
@@ -50,14 +51,17 @@ const styles = theme => ({
       boxShadow: 'none',
       fontStyle: 'italic',
       backgroundColor: "#fafafa",
-    },
-    '& > * > *': {
-      margin: '0 4px'
+      '& > *:first-child': {
+        fontWeight: 'bold',
+        color: '#3f51b5'
+      },
     },
     '& > * *': {
       display: 'inline',
       color: "#95949e",
-      fontWeight: 'normal'
+      fontWeight: 'normal',
+      fontSize: "13px",
+      margin: '0'
     }
   }
 });

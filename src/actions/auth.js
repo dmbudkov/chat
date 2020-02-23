@@ -1,5 +1,6 @@
 import * as types from "../constants/auth";
 import callApi from "../utils/call-api";
+import { getMessages } from "./chats";
 
 
 export function signup(username, password) {
@@ -85,11 +86,14 @@ export function recieveAuth() {
   return (dispatch, getState) => {
     const { token } = getState().auth;
 
+    dispatch({
+      type: types.RECEIVE_AUTH_REQUEST
+    });
+
     if(!token) {
-      dispatch({
+      return dispatch({
         type: types.RECEIVE_AUTH_FAILURE,
       });
-      return;
     }
 
     return callApi("users/me", token)
@@ -102,4 +106,32 @@ export function recieveAuth() {
         payload: reason
       }))
   };
+}
+
+export function editUser(data) {
+  return (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    dispatch({
+      type: types.UPDATE_PROFILE_REQUEST,
+    });
+
+    if(!token) {
+      return dispatch({
+        type: types.UPDATE_PROFILE_FAILURE,
+      });
+    }
+
+    return callApi("users/me", token, { method: "POST" }, { data })
+      .then(json => {
+        dispatch({
+          type: types.UPDATE_PROFILE_SUCCESS,
+          payload: json
+        });
+        dispatch(getMessages());
+      }).catch(reason => dispatch({
+        type: types.UPDATE_PROFILE_FAILURE,
+        payload: reason
+      }))
+  }
 }

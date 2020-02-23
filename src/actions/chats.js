@@ -241,9 +241,3 @@ export function getMessages() {
       })
   }
 }
-
-export function editUser() {
-  return (dispatch, getState) => {
-    //
-  }
-}

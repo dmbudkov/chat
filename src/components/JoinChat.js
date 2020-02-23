@@ -17,8 +17,7 @@ const styles = (theme) => ({
     background: "#ffffff"
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    //boxShadow: theme.shadows[4],
+    backgroundColor: "#fafafa",
     padding: theme.spacing(2, 4, 3),
     borderRadius: "2px"
   },

@@ -22,7 +22,7 @@ const styles = () => ({
   }
 });
 
-function ChatHeader({ classes, title, marginLeft = 320, logout, deleteChat, isAuth, isMember, isCreator, joinChat, leaveChat }) {
+function ChatHeader({ classes, title, marginLeft = 320, logout, deleteChat, isAuth, isMember, isCreator, joinChat, leaveChat, user, editUser }) {
   return (
     <AppBar className={classes.appBar}
             style={{
@@ -32,16 +32,17 @@ function ChatHeader({ classes, title, marginLeft = 320, logout, deleteChat, isAu
       <Toolbar className={classes.toolbar}>
         <div className={classes.wrapper}>
           <Typography className={classes.title} variant="h6" noWrap>{title}</Typography>
-          {
-            title && <ChatMenu deleteChat={deleteChat}
+          { title && <ChatMenu deleteChat={deleteChat}
                                isMember={isMember}
                                isCreator={isCreator}
                                joinChat={joinChat}
                                leaveChat={leaveChat}
-            />
-          }
+            /> }
         </div>
-        { isAuth && <UserMenu logout={logout} /> }
+        { isAuth && <UserMenu logout={logout}
+                              user={user}
+                              editUser={editUser}
+          /> }
       </Toolbar>
     </AppBar>
   );
