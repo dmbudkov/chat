@@ -4,7 +4,7 @@ const token = localStorage.getItem('token');
 
 const initialState = {
   isAuth: !!token,
-  user: null,
+  user: {},
   token,
 };
 
@@ -22,6 +22,7 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         isAuth: true,
+        user: action.payload.user,
         username: action.payload.username
       };
     case types.SIGNUP_FAILURE:

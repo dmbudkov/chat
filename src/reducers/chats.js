@@ -105,3 +105,15 @@ export default combineReducers({
 /* Selectors */
 export const getChatId = chat => chat._id;
 export const getByIds = (state, ids) => ids.map(id => state.byIds[id]);
+
+export const isMember = (state, chatId, userId) => {
+  let chat = state.byIds[chatId];
+  return chat ? chat.members.indexOf(userId) !== -1 : false;
+};
+
+export const isCreator = (state, chatId, userId) => {
+  let chat = state.byIds[chatId];
+  return chat ? chat.creator._id === userId : false;
+};
+
+export const isChatMember = (...args) => isMember(...args) || isCreator(...args);

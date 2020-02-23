@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core";
 import MessagesList from "./MessagesList";
 import TypeMessage from "./TypeMessage";
 import EmptyChat from "./EmptyChat";
+import JoinChat from "./JoinChat";
 
 const styles = theme => ({
   drawerHeader: {
@@ -27,16 +28,21 @@ const styles = theme => ({
   }
 });
 
-const Chat = ({ classes, messages, activeChat }) => (
-  <main className={classes.content}>
-    <div className={classes.drawerHeader} />
-    {
-      activeChat.id
-      ? <MessagesList messages={ messages } />
-      : <EmptyChat />
-    }
-    <TypeMessage />
-  </main>
-);
+const Chat = ({ classes, messages, activeChat, isChatMember }) => {
+
+  let content = () => {
+    if (!activeChat.id) return <EmptyChat />;
+    if (!isChatMember) return <JoinChat />;
+    return <MessagesList messages={ messages } />
+  };
+
+  return (
+    <main className={classes.content}>
+      <div className={classes.drawerHeader} />
+      { content() }
+      <TypeMessage />
+    </main>
+  );
+};
 
 export default withStyles(styles)(Chat);

@@ -25,7 +25,7 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth } = this.props;
+    const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember } = this.props;
     return (
       <div className={classes.root}>
         <ChatHeader title={activeChat.title}
@@ -40,7 +40,9 @@ class ChatPage extends React.Component {
                  activeId={activeChat.id}
         />
         <Chat messages={messages}
-              activeChat={activeChat} />
+              activeChat={activeChat}
+              isChatMember={isChatMember}
+        />
       </div>
     );
   }
