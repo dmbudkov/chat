@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import AvatarPerson from "./AvatarPerson";
+import StarIcon from "@material-ui/icons/Star";
 
 
 const styles = {
@@ -13,11 +14,15 @@ const styles = {
   },
   listActive: {
     backgroundColor: "#f2f2f2"
+  },
+  star: {
+    color: "#3f51b5",
+    opacity: '.15'
   }
 };
 
 
-function ChatListItem({ title, date, classes, setActiveChat, _id, isActive }) {
+function ChatListItem({ title, date, classes, setActiveChat, _id, isActive, isCreator }) {
 
   const handleSetActive = () => {
     setActiveChat(_id);
@@ -31,6 +36,7 @@ function ChatListItem({ title, date, classes, setActiveChat, _id, isActive }) {
       </ListItemAvatar>
       <ListItemText primary={title}
                     secondary={date} />
+      { isCreator && <StarIcon className={classes.star} /> }
     </ListItem>
   )
 }

@@ -28,19 +28,22 @@ const styles = theme => ({
   }
 });
 
-const Chat = ({ classes, messages, activeChat, isChatMember, joinChat }) => {
+const Chat = ({ classes, messages, activeChat, isChatMember, joinChat, sendMessage, getMessages, user }) => {
 
   let content = () => {
     if (!activeChat.id) return <EmptyChat />;
     if (!isChatMember) return <JoinChat joinChat={joinChat} />;
-    return <MessagesList messages={ messages } />
+    return <MessagesList messages={ messages }
+                         getMessages={getMessages}
+                         user={user}
+    />
   };
 
   return (
     <main className={classes.content}>
       <div className={classes.drawerHeader} />
       { content() }
-      <TypeMessage />
+      <TypeMessage sendMessage={sendMessage} />
     </main>
   );
 };

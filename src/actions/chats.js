@@ -91,7 +91,9 @@ export function setActiveChat(chatId) {
           type: types.SET_ACTIVE_CHAT,
           payload: data
         });
-        return dispatch(redirect(`chat/${chatId}`));
+
+        dispatch(redirect(`chat/${chatId}`));
+        return dispatch(getMessages());
       });
   }
 }
@@ -173,18 +175,18 @@ export function deleteChat() {
       type: types.DELETE_CHAT_REQUEST
     });
 
-    const { activeChat } = getState().chats;
+    const chatId = getState().chats.activeChat.id;
 
-    if(!activeChat.id) {
+    if(!chatId) {
       return dispatch({
         type: types.DELETE_CHAT_FAILURE
       });
     }
 
-    callApi(`chats/${activeChat.id}`, token, { method: "DELETE" })
+    callApi(`chats/${chatId}`, token, { method: "DELETE" })
       .then(() => dispatch({
         type: types.DELETE_CHAT_SUCCESS,
-        payload: activeChat.id
+        payload: chatId
       }))
       .catch(() => {
         dispatch({
@@ -194,9 +196,52 @@ export function deleteChat() {
   }
 }
 
-export function sendMessage() {
+export function sendMessage(message) {
   return (dispatch, getState) => {
-    //
+    const { token } = getState().auth;
+    const chatId = getState().chats.activeChat.id;
+    dispatch({
+      type: types.SEND_MESSAGE_REQUEST
+    });
+
+    callApi(`chats/${chatId}`, token, { method: "POST" }, {
+      data: {
+        "content": message,
+        "statusMessage": false
+      }
+    })
+      .then(data => dispatch({
+        type: types.SEND_MESSAGE_SUCCESS,
+        payload: data
+      }))
+      .catch(reason => {
+        dispatch({
+          type: types.SEND_MESSAGE_FAILURE,
+          payload: reason
+        });
+      })
+  }
+}
+
+export function getMessages() {
+  return (dispatch, getState) => {
+    const { token } = getState().auth;
+    const chatId = getState().chats.activeChat.id;
+    dispatch({
+      type: types.CHAT_MESSAGES_REQUEST
+    });
+
+    callApi(`chats/${chatId}`, token)
+      .then(data => dispatch({
+        type: types.CHAT_MESSAGES_SUCCESS,
+        payload: data
+      }))
+      .catch(reason => {
+        dispatch({
+          type: types.CHAT_MESSAGES_FAILURE,
+          payload: reason
+        });
+      })
   }
 }
 

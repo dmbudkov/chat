@@ -1,10 +1,8 @@
 import React from 'react';
 import { withStyles } from "@material-ui/core";
-import { messages } from '../mock-data';
 import SideBar from "./SideBar";
 import ChatHeader from "./ChatHeader";
 import Chat from "./Chat";
-import {isCreator} from "../reducers/chats";
 
 
 const styles = () => ({
@@ -26,7 +24,8 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember, joinChat, leaveChat, isMember, isCreator } = this.props;
+    const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember,
+      joinChat, leaveChat, isMember, isCreator, sendMessage, getMessages, messages, user } = this.props;
     return (
       <div className={classes.root}>
         <ChatHeader title={activeChat.title}
@@ -43,11 +42,15 @@ class ChatPage extends React.Component {
                  createChat={createChat}
                  setActiveChat={setActiveChat}
                  activeId={activeChat.id}
+                 user={user}
         />
         <Chat messages={messages}
               activeChat={activeChat}
               isChatMember={isChatMember}
               joinChat={joinChat}
+              sendMessage={sendMessage}
+              getMessages={getMessages}
+              user={user}
         />
       </div>
     );

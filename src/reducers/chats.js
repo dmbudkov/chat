@@ -8,7 +8,8 @@ const initialState = {
   },
   allIds: [],
   myId: [],
-  byIds: {}
+  byIds: {},
+  messages: []
 };
 
 const activeChat = (state = {
@@ -105,11 +106,29 @@ const byIds = (state = initialState.byIds, action) => {
   }
 };
 
+const messages = (state = initialState.messages, action) => {
+  switch (action.type) {
+    case types.CHAT_MESSAGES_REQUEST:
+      return [];
+    case types.CHAT_MESSAGES_SUCCESS:
+      return action.payload.chat.messages;
+    case types.SEND_MESSAGE_SUCCESS:
+      return [
+        ...state,
+        action.payload.message
+      ];
+    default:
+      return state;
+  }
+};
+
+
 export default combineReducers({
   activeChat,
   allIds,
   myId,
-  byIds
+  byIds,
+  messages,
 });
 
 

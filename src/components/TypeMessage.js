@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
@@ -13,12 +13,32 @@ const styles = theme => ({
   }
 });
 
-function TypeMessage({ classes }) {
+function TypeMessage({ classes, sendMessage }) {
+  const [value, setValue] = useState('');
+
+  const handleChangeValue = e => {
+    e.persist();
+    setValue(e.target.value);
+  };
+
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      sendMessage(value);
+      setValue('');
+    }
+  };
 
   return (
     <Paper className={classes.input}>
       <Toolbar>
-        <Input fullWidth id="standard-required" placeholder="Type your message..." />
+        <Input fullWidth
+               autoComplete="off"
+               id="standard-required"
+               placeholder="Type your message..."
+               value={value}
+               onChange={handleChangeValue}
+               onKeyDown={handleKeyDown}
+        />
       </Toolbar>
     </Paper>
   );

@@ -17,6 +17,7 @@ class MessagesList extends React.Component {
   constructor(props) {
     super(props);
     this.messages = React.createRef();
+    this.getMessages = this.props.getMessages;
   }
 
   scrollDown() {
@@ -30,16 +31,20 @@ class MessagesList extends React.Component {
     this.scrollDown();
   }
   componentDidMount() {
-    this.scrollDown()
+    this.getMessages();
+    this.scrollDown();
   }
 
   render() {
-    const { classes, messages } = this.props;
+    const { classes, messages, user } = this.props;
 
     return (
       <List className={classes.messages} ref={this.messages}>
         {messages && messages.map((message, index) => (
-          <Message {...message} key={index} />
+          <Message {...message}
+                   key={index}
+                   user={user}
+          />
         ))}
       </List>
     )
