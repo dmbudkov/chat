@@ -35,6 +35,16 @@ export default function auth(state = initialState, action) {
         username: null,
         token: '',
       };
+    case types.UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          username: action.payload.user.username,
+          firstName: action.payload.user.firstName,
+          lastName: action.payload.user.lastName,
+        }
+      };
     default:
       return state;
   }
