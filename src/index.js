@@ -9,21 +9,20 @@ import * as serviceWorker from './serviceWorker';
 const store = configureStore();
 const rootEl = document.getElementById('root');
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  rootEl
-);
+const render = (Component) => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Component />
+    </Provider>,
+    rootEl
+  );
+};
+
+render(App);
 
 if (module.hot) {
   module.hot.accept('./components/App', () => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      rootEl
-    )
+    render(App);
   })
 }
 
