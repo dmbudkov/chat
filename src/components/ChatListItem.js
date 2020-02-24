@@ -22,10 +22,12 @@ const styles = {
 };
 
 
-function ChatListItem({ title, date, classes, setActiveChat, _id, isActive, isCreator }) {
+function ChatListItem({ title, date, classes, setActiveChat, _id, activeId, isActive, isCreator, mountChat, unmountChat }) {
 
   const handleSetActive = () => {
+    unmountChat(activeId);
     setActiveChat(_id);
+    mountChat(_id);
   };
 
   return (

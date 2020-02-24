@@ -44,7 +44,7 @@ const Chat = ({ classes, messages, activeChat, isChatMember, joinChat, sendMessa
     <main className={classes.content}>
       <div className={classes.drawerHeader} />
       { content() }
-      <TypeMessage sendMessage={sendMessage} />
+      { isChatMember && <TypeMessage sendMessage={sendMessage} /> }
     </main>
   );
 };

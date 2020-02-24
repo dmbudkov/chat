@@ -29,7 +29,13 @@ function NewChatButton({ classes, createChat }) {
     value: '',
     valid: true
   });
-  const handleOpen = () => { setOpen(true) };
+  const handleOpen = () => {
+    setOpen(true);
+    setChatName({
+      ...chatName,
+      value: '',
+    });
+  };
   const handleClose = () => { setOpen(false) };
 
   const handleChangeValue = (event) => {

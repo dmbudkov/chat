@@ -1,5 +1,4 @@
-import * as types from "../constants/chats";
-import { SEARCH_FILTER_APPLY } from "../constants/services";
+import * as types from "../constants";
 import { combineReducers } from "redux";
 
 const initialState = {
@@ -40,19 +39,14 @@ const allIds = (state = initialState.allIds, action) => {
   switch (action.type) {
     case types.FETCH_ALL_CHATS_SUCCESS:
       return action.payload.chats.map(getChatId);
-    case types.CHAT_CREATE_SUCCESS:
+    case types.RECEIVE_NEW_CHAT:
       return [
         ...state,
         action.payload.chat._id
       ];
     case types.DELETE_CHAT_SUCCESS:
-      const index = state.indexOf(action.payload);
-
-      return [
-        ...state.slice(0, index),
-        ...state.slice(index+1, state.length)
-      ];
-
+    case types.RECEIVE_DELETED_CHAT:
+      return state.filter(i => i !== action.payload);
     default:
       return state;
   }
@@ -68,19 +62,10 @@ const myId = (state = initialState.myId, action) => {
         action.payload.chat._id
       ];
     case types.DELETE_CHAT_SUCCESS:
-      const indexDel = state.indexOf(action.payload);
-
-      return [
-        ...state.slice(0, indexDel),
-        ...state.slice(indexDel+1, state.length)
-      ];
+    case types.RECEIVE_DELETED_CHAT:
+      return state.filter(i => i !== action.payload);
     case types.LEAVE_CHAT_SUCCESS:
-      const indexLeave = state.indexOf(action.payload.chat._id);
-
-      return [
-        ...state.slice(0, indexLeave),
-        ...state.slice(indexLeave+1, state.length)
-      ];
+      return state.filter(i => i !== action.payload.chat._id);
     default:
       return state;
   }
@@ -99,6 +84,7 @@ const byIds = (state = initialState.byIds, action) => {
     case types.CHAT_CREATE_SUCCESS:
     case types.JOIN_CHAT_SUCCESS:
     case types.LEAVE_CHAT_SUCCESS:
+    case types.RECEIVE_NEW_CHAT:
       return {
         ...state,
         [action.payload.chat._id]: action.payload.chat
@@ -110,15 +96,10 @@ const byIds = (state = initialState.byIds, action) => {
 
 const messages = (state = initialState.messages, action) => {
   switch (action.type) {
-    case types.CHAT_MESSAGES_REQUEST:
-      return [];
     case types.CHAT_MESSAGES_SUCCESS:
       return action.payload.chat.messages;
-    case types.SEND_MESSAGE_SUCCESS:
-      return [
-        ...state,
-        action.payload.message
-      ];
+    case types.RECEIVE_MESSAGE:
+      return [...state, action.payload.message];
     default:
       return state;
   }
@@ -126,7 +107,7 @@ const messages = (state = initialState.messages, action) => {
 
 const searchWord = (state = initialState.searchWord, action) => {
   switch (action.type) {
-    case SEARCH_FILTER_APPLY:
+    case types.SEARCH_FILTER_APPLY:
       return action.payload;
     default:
       return state;

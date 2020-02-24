@@ -15,17 +15,22 @@ const styles = () => ({
 class ChatPage extends React.Component {
 
   componentDidMount() {
-    const { fetchAllChats, fetchMyChats } = this.props;
+    const { fetchAllChats, fetchMyChats, socketsConnect } = this.props;
 
     Promise.all([
       fetchAllChats(),
       fetchMyChats()
     ])
+      .then(() => {
+        socketsConnect();
+    });
   }
 
   render() {
     const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember,
-      joinChat, leaveChat, isMember, isCreator, sendMessage, getMessages, messages, user, editUser, filterApply } = this.props;
+      joinChat, leaveChat, isMember, isCreator, sendMessage, getMessages, messages, user, editUser, filterApply,
+      mountChat, unmountChat
+    } = this.props;
     return (
       <div className={classes.root}>
         <ChatHeader title={activeChat.title}
@@ -46,6 +51,8 @@ class ChatPage extends React.Component {
                  activeId={activeChat.id}
                  user={user}
                  filterApply={filterApply}
+                 mountChat={mountChat}
+                 unmountChat={unmountChat}
         />
         <Chat messages={messages}
               activeChat={activeChat}

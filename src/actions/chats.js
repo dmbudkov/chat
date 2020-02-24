@@ -2,6 +2,7 @@ import * as types from "../constants/chats";
 import callApi from "../utils/call-api";
 import { redirect } from "./services";
 import history from "../utils/history";
+import { mountChat } from "./sockets"
 
 
 export function fetchMyChats() {
@@ -41,6 +42,7 @@ export function fetchAllChats() {
 
         if(chatIds.indexOf(urlId) !== -1){
           dispatch(setActiveChat(urlId));
+          dispatch(mountChat(urlId));
         }
         else {
           return dispatch(redirect("chat"));
@@ -188,33 +190,6 @@ export function deleteChat() {
       .catch(() => {
         dispatch({
           type: types.DELETE_CHAT_FAILURE
-        });
-      })
-  }
-}
-
-export function sendMessage(message) {
-  return (dispatch, getState) => {
-    const { token } = getState().auth;
-    const chatId = getState().chats.activeChat.id;
-    dispatch({
-      type: types.SEND_MESSAGE_REQUEST
-    });
-
-    callApi(`chats/${chatId}`, token, { method: "POST" }, {
-      data: {
-        "content": message,
-        "statusMessage": false
-      }
-    })
-      .then(data => dispatch({
-        type: types.SEND_MESSAGE_SUCCESS,
-        payload: data
-      }))
-      .catch(reason => {
-        dispatch({
-          type: types.SEND_MESSAGE_FAILURE,
-          payload: reason
         });
       })
   }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { withStyles } from "@material-ui/core";
-import Message from "./Message";
 import List from "@material-ui/core/List";
+import Message from "./Message";
+import FirstMessage from "./FirstMessage";
 
 const styles = theme => ({
   messages: {
@@ -39,14 +40,14 @@ class MessagesList extends React.Component {
     const { classes, messages, user } = this.props;
 
     return (
-      <List className={classes.messages} ref={this.messages}>
+     messages.length !== 0 ? <List className={classes.messages} ref={this.messages}>
         {messages && messages.map((message, index) => (
           <Message {...message}
                    key={index}
                    user={user}
           />
         ))}
-      </List>
+      </List> : <FirstMessage />
     )
   }
 }
