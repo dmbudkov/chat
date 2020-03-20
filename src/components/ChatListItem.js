@@ -6,6 +6,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import AvatarPerson from "./AvatarPerson";
 import StarIcon from "@material-ui/icons/Star";
+import PropTypes from "prop-types";
 
 
 const styles = {
@@ -42,5 +43,18 @@ function ChatListItem({ title, date, classes, setActiveChat, _id, activeId, isAc
     </ListItem>
   )
 }
+
+ChatListItem.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.string,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  setActiveChat: PropTypes.func,
+  _id: PropTypes.string,
+  activeId: PropTypes.string,
+  isActive: PropTypes.bool,
+  isCreator: PropTypes.bool,
+  mountChat: PropTypes.func,
+  unmountChat: PropTypes.func
+};
 
 export default withStyles(styles)(ChatListItem);

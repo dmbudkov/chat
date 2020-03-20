@@ -6,6 +6,7 @@ import Modal from "../components/Modal";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
+import PropTypes from "prop-types";
 
 
 const styles = theme => ({
@@ -85,5 +86,10 @@ function NewChatButton({ classes, createChat }) {
     </>
   )
 }
+
+NewChatButton.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  createChat: PropTypes.func
+};
 
 export default withStyles(styles)(NewChatButton);

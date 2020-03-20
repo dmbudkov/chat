@@ -2,7 +2,8 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import ModalUI from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
+import { useSpring, animated } from 'react-spring/web.cjs';
+import PropTypes from "prop-types"; // web.cjs is required for IE 11 support
 
 
 const Fade = React.forwardRef(function Fade(props, ref) {
@@ -61,5 +62,12 @@ export function Modal({ children, classes, open, handleClose }) {
     </ModalUI>
   )
 }
+
+Modal.propTypes = {
+  children: PropTypes.object,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  open: PropTypes.bool,
+  handleClose: PropTypes.func
+};
 
 export default withStyles(styles)(Modal);

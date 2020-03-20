@@ -11,6 +11,7 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
+import PropTypes from "prop-types";
 
 const styles = () => ({
   root: {
@@ -54,5 +55,12 @@ function WelcomePage({ classes, signup, login, isAuth }) {
     </div>
   );
 }
+
+WelcomePage.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  signup: PropTypes.func,
+  login: PropTypes.func,
+  isAuth: PropTypes.bool
+};
 
 export default withStyles(styles)(WelcomePage);

@@ -3,8 +3,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import PropTypes from "prop-types";
 
-export default function ({ deleteChat, isMember, isCreator, joinChat, leaveChat }) {
+export default function CharMenu ({ deleteChat, isMember, isCreator, joinChat, leaveChat }) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = event => {
@@ -49,3 +50,11 @@ export default function ({ deleteChat, isMember, isCreator, joinChat, leaveChat 
     </>
   )
 }
+
+CharMenu.propTypes = {
+  deleteChat: PropTypes.func,
+  isMember: PropTypes.bool,
+  isCreator: PropTypes.bool,
+  joinChat: PropTypes.func,
+  leaveChat: PropTypes.func
+};

@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core";
 import SideBar from "./SideBar";
 import ChatHeader from "./ChatHeader";
 import Chat from "./Chat";
+import PropTypes from "prop-types";
 
 
 const styles = () => ({
@@ -66,5 +67,33 @@ class ChatPage extends React.Component {
     );
   }
 }
+
+ChatPage.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  chats: PropTypes.array,
+  myChats: PropTypes.array,
+  createChat: PropTypes.func,
+  logout: PropTypes.func,
+  setActiveChat: PropTypes.func,
+  activeChat: PropTypes.object,
+  deleteChat: PropTypes.func,
+  isAuth: PropTypes.bool,
+  isChatMember: PropTypes.bool,
+  joinChat: PropTypes.func,
+  leaveChat: PropTypes.func,
+  isMember: PropTypes.bool,
+  isCreator: PropTypes.bool,
+  sendMessage: PropTypes.func,
+  getMessages: PropTypes.func,
+  messages: PropTypes.array,
+  user: PropTypes.object,
+  editUser: PropTypes.func,
+  filterApply: PropTypes.func,
+  mountChat: PropTypes.func,
+  unmountChat: PropTypes.func,
+  fetchAllChats: PropTypes.func,
+  fetchMyChats: PropTypes.func,
+  socketsConnect: PropTypes.func
+};
 
 export default withStyles(styles)(ChatPage);

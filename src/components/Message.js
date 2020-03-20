@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import AvatarPerson from "./AvatarPerson";
+import PropTypes from "prop-types";
 
 
 const styles = theme => ({
@@ -94,5 +95,14 @@ function Message ({ sender, content, createdAt, statusMessage, classes, user }) 
       </Paper>
     </ListItem>
 )}
+
+Message.propTypes = {
+  sender: PropTypes.object,
+  content: PropTypes.string,
+  createdAt: PropTypes.string,
+  statusMessage: PropTypes.bool,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.object
+};
 
 export default withStyles(styles)(Message);

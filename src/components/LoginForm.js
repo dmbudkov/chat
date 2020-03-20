@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import PropTypes from "prop-types";
 
 const styles = () => ({
   form: {
@@ -91,5 +92,8 @@ class LoginForm extends React.Component {
   }
 }
 
+LoginForm.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default withStyles(styles)(LoginForm);

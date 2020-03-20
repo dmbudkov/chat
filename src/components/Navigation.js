@@ -3,9 +3,10 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import RestoreIcon from "@material-ui/icons/Restore";
 import ExploreIcon from "@material-ui/icons/Explore";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
+import PropTypes from "prop-types";
 
 
-export default class extends React.Component {
+export default class Navigation extends React.Component {
   render() {
     const { activeTab, setActiveTab } = this.props;
 
@@ -24,3 +25,8 @@ export default class extends React.Component {
     );
   }
 }
+
+Navigation.propTypes = {
+  activeTab: PropTypes.number,
+  setActiveTab: PropTypes.func
+};

@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import Message from "./Message";
 import FirstMessage from "./FirstMessage";
+import PropTypes from "prop-types";
 
 const styles = theme => ({
   messages: {
@@ -51,5 +52,11 @@ class MessagesList extends React.Component {
     )
   }
 }
+
+MessagesList.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  messages: PropTypes.array,
+  user: PropTypes.object
+};
 
 export default withStyles(styles)(MessagesList);

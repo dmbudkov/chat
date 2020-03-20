@@ -1,6 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import PropTypes from "prop-types";
 
 const styles = (theme) => ({
   wrap: {
@@ -41,5 +42,9 @@ export function FirstMessage ({ classes }) {
     </div>
   )
 }
+
+FirstMessage.proprTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default withStyles(styles)(FirstMessage);

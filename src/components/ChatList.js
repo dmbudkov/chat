@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ChatListItem from "./ChatListItem";
+import PropTypes from "prop-types";
 
 const styles = {
   list: {
@@ -30,5 +31,17 @@ function ChatList({ classes, chats, setActiveChat, activeId, getMessages, user, 
     </List>
   )
 }
+
+ChatList.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  chats: PropTypes.array,
+  setActiveChat: PropTypes.func,
+  activeId: PropTypes.string,
+  getMessages: PropTypes.func,
+  user: PropTypes.object,
+  mountChat: PropTypes.func,
+  unmountChat: PropTypes.func
+};
+
 
 export default withStyles(styles)(ChatList)

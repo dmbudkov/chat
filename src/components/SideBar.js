@@ -5,6 +5,7 @@ import NewChatButton from "./NewChatButton";
 import Drawer from "@material-ui/core/Drawer";
 import Navigation from "./Navigation";
 import ChatList from "./ChatList";
+import PropTypes from "prop-types";
 
 
 const styles = () => ({
@@ -57,5 +58,18 @@ class SideBar extends React.Component {
     );
   }
 }
+
+SideBar.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  chats: PropTypes.array,
+  myChats: PropTypes.array,
+  createChat: PropTypes.func,
+  setActiveChat: PropTypes.func,
+  activeId: PropTypes.string,
+  user: PropTypes.object,
+  filterApply: PropTypes.func,
+  mountChat: PropTypes.func,
+  unmountChat: PropTypes.func
+};
 
 export default withStyles(styles)(SideBar);

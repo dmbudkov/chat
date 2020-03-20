@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
+import PropTypes from "prop-types";
 
 const styles = (theme) => ({
   wrap: {
@@ -49,5 +50,10 @@ export function JoinChat ({ classes, joinChat }) {
     </div>
   )
 }
+
+JoinChat.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  joinChat: PropTypes.func
+};
 
 export default withStyles(styles)(JoinChat);

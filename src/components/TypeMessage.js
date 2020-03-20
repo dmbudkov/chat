@@ -3,6 +3,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 const styles = theme => ({
   input: {
@@ -42,5 +43,10 @@ function TypeMessage({ classes, sendMessage }) {
     </Paper>
   );
 }
+
+TypeMessage.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  sendMessage: PropTypes.func
+};
 
 export default withStyles(styles)(TypeMessage);

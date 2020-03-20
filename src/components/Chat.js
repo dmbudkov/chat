@@ -4,6 +4,7 @@ import MessagesList from "./MessagesList";
 import TypeMessage from "./TypeMessage";
 import EmptyChat from "./EmptyChat";
 import JoinChat from "./JoinChat";
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
   drawerHeader: {
@@ -47,6 +48,17 @@ const Chat = ({ classes, messages, activeChat, isChatMember, joinChat, sendMessa
       { isChatMember && <TypeMessage sendMessage={sendMessage} /> }
     </main>
   );
+};
+
+Chat.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  messages: PropTypes.array,
+  activeChat: PropTypes.object,
+  isChatMember: PropTypes.bool,
+  joinChat: PropTypes.func,
+  sendMessage: PropTypes.func,
+  getMessages: PropTypes.func,
+  user: PropTypes.object
 };
 
 export default withStyles(styles)(Chat);

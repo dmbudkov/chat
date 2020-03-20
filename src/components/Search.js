@@ -1,8 +1,9 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import Toolbar from "@material-ui/core/Toolbar";
+import PropTypes from "prop-types";
 
-export default ({ filterApply }) => {
+const Search = ({ filterApply }) => {
 
   const handleFilterApply = e => {
     filterApply(e.target.value)
@@ -17,4 +18,10 @@ export default ({ filterApply }) => {
       />
     </Toolbar>
   );
-}
+};
+
+Search.propTypes = {
+  filterApply: PropTypes.func
+};
+
+export default Search;
