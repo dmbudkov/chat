@@ -1,4 +1,5 @@
 import SocketIOClient from 'socket.io-client';
+import config from "../config";
 import * as types from '../constants';
 import { redirect } from "./services";
 
@@ -19,7 +20,7 @@ export function socketsConnect() {
       type: types.SOCKET_CONNECTION_REQUEST,
     });
 
-    socket = SocketIOClient('ws://localhost:8000', {
+    socket = SocketIOClient(config.SOCKETS_URI, {
       query: { token }
     });
 
