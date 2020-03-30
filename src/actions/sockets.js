@@ -14,7 +14,15 @@ let socket = null;
 
 export function socketsConnect() {
   return (dispatch, getState) => {
-    const { token } = getState().auth;
+
+    const state = getState();
+
+    const { isFetching } = state.services;
+    if(isFetching.sockets){
+      return Promise.resolve();
+    }
+
+    const { token } = state.auth;
 
     dispatch({
       type: types.SOCKET_CONNECTION_REQUEST,

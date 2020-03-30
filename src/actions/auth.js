@@ -4,7 +4,13 @@ import { getMessages } from "./chats";
 
 
 export function signup(username, password) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+
+    const { isFetching } = getState().services;
+    if(isFetching.signup){
+      return Promise.resolve();
+    }
+
     dispatch({
       type: types.SIGNUP_REQUEST,
     });
@@ -32,7 +38,13 @@ export function signup(username, password) {
 }
 
 export function login(username, password) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+
+    const { isFetching } = getState().services;
+    if(isFetching.login){
+      return Promise.resolve();
+    }
+
     dispatch({
       type: types.LOGIN_REQUEST,
     });
@@ -60,7 +72,13 @@ export function login(username, password) {
 }
 
 export function logout() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+
+    const { isFetching } = getState().services;
+    if(isFetching.logout){
+      return Promise.resolve();
+    }
+
     dispatch({
       type: types.LOGOUT_REQUEST,
     });
@@ -84,7 +102,14 @@ export function logout() {
 
 export function recieveAuth() {
   return (dispatch, getState) => {
-    const { token } = getState().auth;
+
+    const state = getState();
+    const { isFetching } = state.services;
+    if(isFetching.receiveAuth){
+      return Promise.resolve();
+    }
+
+    const { token } = state.auth;
 
     dispatch({
       type: types.RECEIVE_AUTH_REQUEST
@@ -110,7 +135,14 @@ export function recieveAuth() {
 
 export function editUser(data) {
   return (dispatch, getState) => {
-    const { token } = getState().auth;
+
+    const state = getState();
+    const { isFetching } = state.services;
+    if(isFetching.editUser){
+      return Promise.resolve();
+    }
+
+    const { token } = state.auth;
 
     dispatch({
       type: types.UPDATE_PROFILE_REQUEST,
