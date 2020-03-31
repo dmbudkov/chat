@@ -4,6 +4,7 @@ import SideBar from "./SideBar";
 import ChatHeader from "./ChatHeader";
 import Chat from "./Chat";
 import PropTypes from "prop-types";
+import ErrorMessage from "./ErrorMessage";
 
 
 const styles = () => ({
@@ -30,7 +31,7 @@ class ChatPage extends React.Component {
   render() {
     const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember,
       joinChat, leaveChat, isMember, isCreator, sendMessage, getMessages, messages, user, editUser, filterApply,
-      mountChat, unmountChat
+      mountChat, unmountChat, error
     } = this.props;
     return (
       <div className={classes.root}>
@@ -63,6 +64,7 @@ class ChatPage extends React.Component {
               getMessages={getMessages}
               user={user}
         />
+        <ErrorMessage error={error} />
       </div>
     );
   }

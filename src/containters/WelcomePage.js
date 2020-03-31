@@ -6,6 +6,7 @@ import WelcomePage from "../components/WelcomePage";
 
 const mapStateToProps = state => ({
   isAuth: state.auth.isAuth,
+  error: state.services.errors.auth,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

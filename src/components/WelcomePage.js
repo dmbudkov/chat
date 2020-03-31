@@ -11,6 +11,7 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
+import ErrorMessage from "./ErrorMessage";
 import PropTypes from "prop-types";
 
 const styles = () => ({
@@ -24,7 +25,7 @@ const styles = () => ({
   }
 });
 
-function WelcomePage({ classes, signup, login, isAuth }) {
+function WelcomePage({ classes, signup, login, isAuth, error }) {
   const [activeTabValue, setTabValue] = React.useState(0);
 
   const handleChangeActiveTab = (event, newValue) => {
@@ -52,6 +53,8 @@ function WelcomePage({ classes, signup, login, isAuth }) {
         { activeTabValue === 0 && <LoginForm onSubmit={login} /> }
         { activeTabValue === 1 && <SignupForm onSubmit={signup} /> }
       </Paper>
+
+      <ErrorMessage error={error} />
     </div>
   );
 }
