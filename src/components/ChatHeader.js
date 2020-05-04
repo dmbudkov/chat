@@ -24,7 +24,7 @@ const styles = () => ({
 });
 
 function ChatHeader({ classes, title, marginLeft = 320, logout, deleteChat, isAuth, isMember,
-                      isCreator, joinChat, leaveChat, user, editUser }) {
+                      isCreator, joinChat, leaveChat, user, editUser, isConnected }) {
   return (
     <AppBar className={classes.appBar}
             style={{
@@ -39,11 +39,13 @@ function ChatHeader({ classes, title, marginLeft = 320, logout, deleteChat, isAu
                                isCreator={isCreator}
                                joinChat={joinChat}
                                leaveChat={leaveChat}
+                               disabled={!isConnected}
             /> }
         </div>
         { isAuth && <UserMenu logout={logout}
                               user={user}
                               editUser={editUser}
+                              disabled={!isConnected}
           /> }
       </Toolbar>
     </AppBar>

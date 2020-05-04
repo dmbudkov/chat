@@ -27,7 +27,7 @@ const styles = {
   }
 };
 
-export function UserMenu ({ classes, logout, user, editUser }) {
+export function UserMenu ({ classes, logout, user, editUser, disabled }) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -67,6 +67,7 @@ export function UserMenu ({ classes, logout, user, editUser }) {
         aria-controls="user-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        disabled={disabled}
       >
         <PersonPinIcon className={classes.icon} />
       </IconButton>

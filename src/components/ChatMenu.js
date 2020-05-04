@@ -5,7 +5,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import PropTypes from "prop-types";
 
-export default function CharMenu ({ deleteChat, isMember, isCreator, joinChat, leaveChat }) {
+export default function CharMenu ({ deleteChat, isMember, isCreator, joinChat, leaveChat, disabled }) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = event => {
@@ -33,8 +33,9 @@ export default function CharMenu ({ deleteChat, isMember, isCreator, joinChat, l
         aria-controls="chat-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        disabled={disabled}
       >
-        <MoreVertIcon style={{ color: "white" }} />
+        <MoreVertIcon style={{ color: "white", opacity: disabled ? .5 : 1 }} />
       </IconButton>
       <Menu
         id="chat-menu"

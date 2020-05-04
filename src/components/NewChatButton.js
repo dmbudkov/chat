@@ -23,7 +23,7 @@ const styles = theme => ({
   }
 });
 
-function NewChatButton({ classes, createChat }) {
+function NewChatButton({ classes, createChat, disabled }) {
 
   const [open, setOpen] = React.useState(false);
   const [chatName, setChatName] = React.useState({
@@ -59,6 +59,7 @@ function NewChatButton({ classes, createChat }) {
         className={classes.newChat}
         color="primary"
         onClick={handleOpen}
+        disabled={disabled}
       >
         <AddIcon />
       </IconButton>

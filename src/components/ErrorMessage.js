@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -7,8 +8,12 @@ function Alert(props) {
 }
 
 export default class ErrorMessage extends React.Component {
+  static propTypes = {
+    error: PropTypes.instanceOf(Error),
+  };
+
   state = {
-    open: false
+    open: !!this.props.error
   };
 
   handleClose = () => {

@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
   messages: state.chats.messages,
   user: state.auth.user,
   error: state.services.errors.chat,
+  isConnected: state.services.isConnected
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

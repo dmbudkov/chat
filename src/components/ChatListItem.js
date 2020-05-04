@@ -23,7 +23,7 @@ const styles = {
 };
 
 
-function ChatListItem({ title, date, classes, setActiveChat, _id, activeId, isActive, isCreator, mountChat, unmountChat }) {
+function ChatListItem({ title, date, classes, setActiveChat, _id, activeId, isActive, isCreator, mountChat, unmountChat, disabled }) {
 
   const handleSetActive = () => {
     unmountChat(activeId);
@@ -33,7 +33,8 @@ function ChatListItem({ title, date, classes, setActiveChat, _id, activeId, isAc
 
   return (
     <ListItem className={classNames(classes.list, { [classes.listActive]: isActive })}
-              onClick={handleSetActive}>
+              onClick={!disabled && handleSetActive}
+              disabled={disabled}>
       <ListItemAvatar>
         <AvatarPerson sender={title} />
       </ListItemAvatar>

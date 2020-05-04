@@ -12,7 +12,7 @@ const styles = {
   }
 };
 
-function ChatList({ classes, chats, setActiveChat, activeId, getMessages, user, mountChat, unmountChat }) {
+function ChatList({ classes, chats, setActiveChat, activeId, getMessages, user, mountChat, unmountChat, disabled }) {
   return (
     <List className={classes.list}
           >
@@ -26,6 +26,7 @@ function ChatList({ classes, chats, setActiveChat, activeId, getMessages, user, 
                       isActive={activeId === chat._id}
                       getMessages={getMessages}
                       isCreator={user._id === chat.creator._id}
+                      disabled={disabled}
         />
       ))}
     </List>

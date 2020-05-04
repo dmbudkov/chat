@@ -30,7 +30,7 @@ const styles = theme => ({
   }
 });
 
-const Chat = ({ classes, messages, activeChat, isChatMember, joinChat, sendMessage, getMessages, user }) => {
+const Chat = ({ classes, messages, activeChat, isChatMember, joinChat, sendMessage, getMessages, user, isConnected }) => {
 
   let content = () => {
     if (!activeChat.id) return <EmptyChat />;
@@ -45,7 +45,9 @@ const Chat = ({ classes, messages, activeChat, isChatMember, joinChat, sendMessa
     <main className={classes.content}>
       <div className={classes.drawerHeader} />
       { content() }
-      { isChatMember && <TypeMessage sendMessage={sendMessage} /> }
+      { isChatMember && <TypeMessage sendMessage={sendMessage}
+                                     disabled={!isConnected}
+      /> }
     </main>
   );
 };

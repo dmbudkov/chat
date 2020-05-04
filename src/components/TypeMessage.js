@@ -14,7 +14,7 @@ const styles = theme => ({
   }
 });
 
-function TypeMessage({ classes, sendMessage }) {
+function TypeMessage({ classes, sendMessage, disabled }) {
   const [value, setValue] = useState('');
 
   const handleChangeValue = e => {
@@ -23,7 +23,7 @@ function TypeMessage({ classes, sendMessage }) {
   };
 
   const handleKeyDown = e => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !disabled) {
       sendMessage(value);
       setValue('');
     }
@@ -38,6 +38,7 @@ function TypeMessage({ classes, sendMessage }) {
                value={value}
                onChange={handleChangeValue}
                onKeyDown={handleKeyDown}
+               disabled={disabled}
         />
       </Toolbar>
     </Paper>

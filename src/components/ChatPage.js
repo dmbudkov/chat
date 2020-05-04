@@ -31,7 +31,7 @@ class ChatPage extends React.Component {
   render() {
     const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember,
       joinChat, leaveChat, isMember, isCreator, sendMessage, getMessages, messages, user, editUser, filterApply,
-      mountChat, unmountChat, error
+      mountChat, unmountChat, error, isConnected
     } = this.props;
     return (
       <div className={classes.root}>
@@ -45,6 +45,7 @@ class ChatPage extends React.Component {
                     leaveChat={leaveChat}
                     user={user}
                     editUser={editUser}
+                    isConnected={isConnected}
         />
         <SideBar chats={chats}
                  myChats={myChats}
@@ -55,6 +56,7 @@ class ChatPage extends React.Component {
                  filterApply={filterApply}
                  mountChat={mountChat}
                  unmountChat={unmountChat}
+                 isConnected={isConnected}
         />
         <Chat messages={messages}
               activeChat={activeChat}
@@ -63,6 +65,7 @@ class ChatPage extends React.Component {
               sendMessage={sendMessage}
               getMessages={getMessages}
               user={user}
+              isConnected={isConnected}
         />
         <ErrorMessage error={error} />
       </div>
