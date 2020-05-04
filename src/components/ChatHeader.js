@@ -19,7 +19,8 @@ const styles = () => ({
     alignItems: "center"
   },
   title: {
-    marginRight: "10px"
+    marginRight: "10px",
+    maxWidth: "300px",
   }
 });
 

@@ -18,7 +18,11 @@ const styles = {
   },
   star: {
     color: "#3f51b5",
-    opacity: '.15'
+    opacity: '.15',
+    paddingLeft: '10px'
+  },
+  text: {
+    overflow: "hidden"
   }
 };
 
@@ -39,6 +43,7 @@ function ChatListItem({ title, date, classes, setActiveChat, _id, activeId, isAc
         <AvatarPerson sender={title} />
       </ListItemAvatar>
       <ListItemText primary={title}
+                    className={classes.text}
                     secondary={date} />
       { isCreator && <StarIcon className={classes.star} /> }
     </ListItem>
