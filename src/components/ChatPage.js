@@ -17,11 +17,12 @@ const styles = () => ({
 class ChatPage extends React.Component {
 
   componentDidMount() {
-    const { fetchAllChats, fetchMyChats, socketsConnect } = this.props;
+    const { fetchAllChats, fetchMyChats, fetchMembers, socketsConnect } = this.props;
 
     Promise.all([
       fetchAllChats(),
-      fetchMyChats()
+      fetchMyChats(),
+      fetchMembers(),
     ])
       .then(() => {
         socketsConnect();
@@ -29,7 +30,7 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, chats, myChats, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember,
+    const { classes, chats, myChats, members, createChat, logout, setActiveChat, activeChat, deleteChat, isAuth, isChatMember,
       joinChat, leaveChat, isMember, isCreator, sendMessage, getMessages, messages, user, editUser, filterApply,
       mountChat, unmountChat, error, isConnected
     } = this.props;
@@ -49,6 +50,7 @@ class ChatPage extends React.Component {
         />
         <SideBar chats={chats}
                  myChats={myChats}
+                 members={members}
                  createChat={createChat}
                  setActiveChat={setActiveChat}
                  activeId={activeChat.id}

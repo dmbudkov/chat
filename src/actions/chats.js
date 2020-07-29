@@ -71,6 +71,33 @@ export function fetchAllChats() {
   };
 }
 
+export function fetchMembers() {
+  return (dispatch, getState) => {
+
+    const state = getState();
+
+    const { isFetching } = state.services;
+    if(isFetching.members){
+      return Promise.resolve();
+    }
+
+    const { token } = state.auth;
+    dispatch({
+      type: types.FETCH_MEMBERS_REQUEST
+    });
+
+    callApi('users', token)
+      .then(data => dispatch({
+        type: types.FETCH_MEMBERS_SUCCESS,
+        payload: data
+      }))
+      .catch(reason => dispatch({
+        type: types.FETCH_MEMBERS_FAILURE,
+        payload: reason
+      }))
+  };
+}
+
 export function fetchChat(chatId) {
   return (dispatch, getState) => {
 

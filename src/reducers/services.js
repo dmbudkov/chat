@@ -10,6 +10,7 @@ const initialState = {
     editUser: false,
     allChats: false,
     myChats: false,
+    members: false,
     fetchChat: false,
     createChat: false,
     joinChat: false,
@@ -68,6 +69,12 @@ export const isFetching = (state = initialState.isFetching, action) => {
     case types.FETCH_MY_CHATS_SUCCESS:
     case types.FETCH_MY_CHATS_FAILURE:
       return {...state, myChats: false};
+
+    case types.FETCH_MEMBERS_REQUEST:
+      return {...state, members: true};
+    case types.FETCH_MEMBERS_SUCCESS:
+    case types.FETCH_MEMBERS_FAILURE:
+      return {...state, members: false};
 
     case types.FETCH_CHAT_REQUEST:
       return {...state, fetchChat: true};

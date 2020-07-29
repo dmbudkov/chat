@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import AvatarPerson from "./AvatarPerson";
+import getUserName from "../utils/get-user-name";
 import PropTypes from "prop-types";
 
 
@@ -69,13 +70,6 @@ const styles = theme => ({
 
 function Message ({ sender, content, createdAt, statusMessage, classes, user }) {
 
-  const name = () => {
-    if (sender.firstName && sender.lastName)
-      return `${sender.firstName} ${sender.lastName}`;
-    if (sender.firstName)
-      return sender.firstName;
-    return sender.username;
-  };
   const time = moment(createdAt).locale('ru').calendar().toLowerCase();
 
   return (
@@ -84,10 +78,10 @@ function Message ({ sender, content, createdAt, statusMessage, classes, user }) 
         [classes.listItemRight]: sender._id === user._id && !statusMessage,
         [classes.listItemCenter]: statusMessage,
       })}>
-      <AvatarPerson sender={name()} />
+      <AvatarPerson sender={getUserName(sender)} />
       <Paper className={classes.card}>
         <Typography className={classes.name} gutterBottom>
-          {name()} <span className={classes.date}>{time}</span>
+          {getUserName()} <span className={classes.date}>{time}</span>
         </Typography>
         <Typography variant="body2" component="p" gutterBottom>
           {content}

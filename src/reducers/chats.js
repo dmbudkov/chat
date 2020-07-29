@@ -9,6 +9,8 @@ const initialState = {
   allIds: [],
   myId: [],
   byIds: {},
+  members: [],
+  byMember: {},
   messages: [],
   searchWord: '',
 };
@@ -94,6 +96,29 @@ const byIds = (state = initialState.byIds, action) => {
   }
 };
 
+const members = (state = initialState.members, action) => {
+  switch (action.type) {
+    case types.FETCH_MEMBERS_SUCCESS:
+      return action.payload.users.map(getChatId);
+    default:
+      return state;
+  }
+};
+const byMember = (state = initialState.byMember, action) => {
+  switch (action.type) {
+    case types.FETCH_MEMBERS_SUCCESS:
+      return {
+        ...state,
+        ...action.payload.users.reduce((ids, user) => ({
+          ...ids,
+          [user._id]: user
+        }), {})
+      };
+    default:
+      return state;
+  }
+}
+
 const messages = (state = initialState.messages, action) => {
   switch (action.type) {
     case types.CHAT_MESSAGES_SUCCESS:
@@ -120,6 +145,8 @@ export default combineReducers({
   allIds,
   myId,
   byIds,
+  members,
+  byMember,
   messages,
   searchWord,
 });
@@ -128,6 +155,7 @@ export default combineReducers({
 /* Selectors */
 export const getChatId = chat => chat._id;
 export const getByIds = (state, ids) => ids.map(id => state.byIds[id]);
+export const getByMember = (state, ids) => ids.map(id => state.byMember[id]);
 
 export const isMember = (state, chatId, userId) => {
   let chat = state.byIds[chatId];
@@ -142,3 +170,4 @@ export const isCreator = (state, chatId, userId) => {
 export const isChatMember = (...args) => isMember(...args) || isCreator(...args);
 
 export const chatListFilter = (chats, q) => chats.filter(i => i.title.toLowerCase().includes(q.toLowerCase()));
+export const memberListFilter = (member, q) => member.filter(i => (i.firstName + i.lastName + i.username).toLowerCase().includes(q.toLowerCase()));

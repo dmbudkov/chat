@@ -6,7 +6,6 @@ import Drawer from "@material-ui/core/Drawer";
 import Navigation from "./Navigation";
 import ChatList from "./ChatList";
 import PropTypes from "prop-types";
-import {isConnected} from "../reducers/services";
 
 
 const styles = () => ({
@@ -33,10 +32,20 @@ class SideBar extends React.Component {
   };
 
   render() {
-    const { classes, chats, myChats, createChat, setActiveChat, activeId, user, filterApply, mountChat, unmountChat, isConnected } = this.props;
-    const dataChat = this.state.activeTab === 1
-      ? chats
-      : myChats;
+    const { classes, chats, myChats, members, createChat, setActiveChat, activeId, user, filterApply, mountChat, unmountChat, isConnected } = this.props;
+    let dataChat;
+
+    switch (this.state.activeTab) {
+      case 0:
+        dataChat = myChats;
+        break;
+      case 1:
+        dataChat = chats;
+        break;
+      case 2:
+        dataChat = members;
+        break;
+    }
 
     return (
       <Drawer

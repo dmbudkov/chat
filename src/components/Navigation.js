@@ -24,11 +24,10 @@ export default class Navigation extends React.Component {
           label="Все чаты"
           disabled={disabled}
           icon={<AllInclusiveIcon />} />
-        {/*<BottomNavigationAction
+        {<BottomNavigationAction
           label="Участники"
           disabled={disabled}
-          fontSize="large"
-          icon={<SupervisorAccountIcon />} />*/}
+          icon={<SupervisorAccountIcon />} />}
       </BottomNavigation>
     );
   }
